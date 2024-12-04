@@ -1,0 +1,5 @@
+@use "mixins"; // Importa las funciones que vayas a utilizar.
+
+$fs-h2: mixins.rem(24px); // Define los tamaños de fuente.
+$fs-h1: mixins.rem(32px);
+$fw-bold: 00;
