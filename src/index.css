@@ -1,0 +1,542 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'Bit';
+  src: url('./assets/fonts/PPNeueBit-Bold.otf');
+}
+@font-face {
+  font-family: 'Daydream';
+  src: url('./assets/fonts/Daydream.ttf');
+}
+
+:root {
+    --text: #062016;
+    --text-inverse: #e1f9f0;
+    --background: #f7fdfb;
+    --primary: #3ed9a6;
+    --secondary: #9e99f8;
+    --accent: #3fe2f7;
+  --hoveraccent: #3fe2f754;
+  --primary-hover: #6ef1c192;
+  --secondary-hover: #b3b1fc53;
+  
+    --primary-gradient-start: #9d8ee5;
+    --primary-gradient-end: #663dd6;
+  }
+.dark {
+
+  --text: #e1f9f0;
+  --text-inverse: #062016;
+  --background: #05140f;
+  --primary: #26c08c;
+  --secondary: #6e3bfc;
+  --accent: #08aabf;
+  --hoveraccent: #3fe2f754;
+  --primary-hover: #3ed9a58e;
+  --secondary-hover: #9e99f855;
+}
+
+/* Oculta el cursor nativo para que solo se vea el personalizado */
+
+body {
+  background-color: var(--background) ;
+  color: var(--text);
+  cursor: none !important;
+
+}
+.dark-mode body {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+h1,h2,h3{
+  @apply
+  font-daydream
+}
+p{
+ @apply
+ font-bit
+}
+.primarybutton{
+  @apply
+  bg-background
+  hover:text-text 
+  hover:bg-primary 
+  p-3
+  rounded-full
+  transition-colors
+  dark:hover:text-text-inverse
+}
+
+.animationbutton {
+  @apply
+    bg-background
+    hover:text-accent 
+    hover:bg-primary 
+    p-3
+    rounded-full
+    transition-colors
+    dark:hover:text-text-inverse;
+}
+@layer components {
+
+  .pixelbutton {
+    @apply inline-flex items-center justify-center gap-2
+           px-5 py-3 m-1 font-bit
+           rounded-md cursor-pointer 
+           transition-all duration-100 ease-in-out
+           w-auto select-none relative;
+
+    background-color: var(--background);
+    color: var(--text);
+    border: none; 
+    
+    box-shadow: 
+      /* CLAVE: Borde exterior simulado pixelado (múltiples escalones de 1px) */
+      0 0 0 1px var(--text), 
+      1px 1px 0 1px var(--text), /* Incrementamos el 'spread' a 1px para grosor */
+      2px 2px 0 1px var(--text),
+      3px 3px 0 1px var(--text),
+      
+      /* CLAVE: Sombra de Profundidad 3D final (más pronunciada) */
+      4px 4px 0 var(--text);
+  }
+
+  /* ESTADO HOVER: El botón se eleva */
+  .pixelbutton:hover {
+    background-color: var(--secondary-hover);
+    transform: translate(-2px, -2px);
+    
+    box-shadow: 
+      /* Borde pixelado (mantenemos el patrón) */
+      0 0 0 1px var(--text), 
+      1px 1px 0 1px var(--text),
+      2px 2px 0 1px var(--text),
+      3px 3px 0 1px var(--text),
+
+      /* Sombra de profundidad más grande (simula que se eleva) */
+      6px 6px 0 var(--text); 
+  }
+
+  /* ESTADO ACTIVE: El botón se "presiona" */
+  .pixelbutton:active {
+    /* Mueve el botón a la posición de la sombra (4px, 4px) */
+    transform: translate(4px, 4px);
+    
+    /* Mantenemos solo el primer 'escalón' del borde para un look de marco hundido */
+    box-shadow: 
+      0 0 0 1px var(--text),
+      1px 1px 0 1px var(--text); 
+  }
+  
+  /* ESTADO FOCUS: El borde azul claro (sin cambios) */
+  .pixelbutton:focus-visible {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: 3px;
+  }
+  .pixelbutton2 {
+    @apply  
+           px-5 py-3 m-1 font-bit
+           rounded-md cursor-pointer 
+           transition-all duration-100 ease-in-out
+           w-auto select-none relative;
+
+    background-color: var(--background);
+    color: var(--text);
+    border: none; 
+    
+    box-shadow: 
+      /* CLAVE: Borde exterior simulado pixelado (múltiples escalones de 1px) */
+      0 0 0 1px var(--text), 
+      1px 1px 0 1px var(--text), /* Incrementamos el 'spread' a 1px para grosor */
+      2px 2px 0 1px var(--text),
+      3px 3px 0 1px var(--text),
+      
+      /* CLAVE: Sombra de Profundidad 3D final (más pronunciada) */
+      4px 4px 0 var(--text);
+  }
+
+  /* ESTADO HOVER: El botón se eleva */
+  .pixelbutton2:hover {
+    transform: translate(-2px, -2px);
+    
+    box-shadow: 
+      /* Borde pixelado (mantenemos el patrón) */
+      0 0 0 1px var(--text), 
+      1px 1px 0 1px var(--text),
+      2px 2px 0 1px var(--text),
+      3px 3px 0 1px var(--text),
+
+      /* Sombra de profundidad más grande (simula que se eleva) */
+      6px 6px 0 var(--text); 
+  }
+
+  /* ESTADO ACTIVE: El botón se "presiona" */
+  .pixelbutton2:active {
+    /* Mueve el botón a la posición de la sombra (4px, 4px) */
+    transform: translate(4px, 4px);
+    
+    /* Mantenemos solo el primer 'escalón' del borde para un look de marco hundido */
+    box-shadow: 
+      0 0 0 1px var(--text),
+      1px 1px 0 1px var(--text); 
+  }
+  
+  /* ESTADO FOCUS: El borde azul claro (sin cambios) */
+  .pixelbutton2:focus-visible {
+    outline: 2px solid var(--focus-outline);
+    outline-offset: 3px;
+  }
+  .pixelbutton3 {
+    @apply  
+           px-5 py-3 m-1 font-bit
+           rounded-md 
+           transition-all duration-100 ease-in-out
+           w-auto select-none relative;
+
+    background-color: var(--background);
+    color: var(--text);
+    border: none; 
+    
+    box-shadow: 
+      /* CLAVE: Borde exterior simulado pixelado (múltiples escalones de 1px) */
+      0 0 0 1px var(--secondary-hover), 
+      1px 1px 0 1px var(--secondary-hover), /* Incrementamos el 'spread' a 1px para grosor */
+      2px 2px 0 1px var(--secondary-hover),
+      3px 3px 0 1px var(--secondary-hover),
+      
+      /* CLAVE: Sombra de Profundidad 3D final (más pronunciada) */
+      4px 4px 0 var(--secondary-hover);
+  }
+
+}
+
+
+
+.toggle-scene {
+  height: 50vmin;
+  position: absolute;
+  overflow: visible;
+}
+
+.toggle-scene__cord {
+  stroke: var(--cord);
+  cursor: move;
+  display: none;
+}
+
+.toggle-scene__cords path:nth-of-type(1) {
+  display: block;
+}
+
+.toggle-scene__cord-end {
+  stroke: var(--cord);
+  fill: var(--cord);
+}
+
+.toggle-scene__dummy-cord {
+  stroke-width: 6;
+  stroke: var(--cord);
+}
+
+
+.swiper-slide {
+  transition: transform 0.3s ease;
+}
+.swiper-slide:hover {
+  transform: scale(1.03);
+
+}.mwg_effect000 .medias {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: 10px;
+  padding: 40px 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.mwg_effect000 .media img {
+  width: 100%;
+  height: 100%;
+  max-height: 100px;
+  object-fit: cover;
+  border-radius: 4px;
+  transition: transform 0.2s ease;
+}
+
+.mwg_effect000 .media:hover img {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  display: grid;
+  place-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #111;
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 90vw;
+  max-height: 90vh;
+  overflow: auto;
+  color: white;
+  text-align: center;
+}
+
+.modal-content img {
+  max-width: 100%;
+  max-height: 70vh;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}
+
+
+.marquee-scroll-wrapper {
+  overflow-x: hidden;
+  cursor: grab;
+  position: relative;
+}
+
+.marquee-scroll-wrapper.dragging {
+  cursor: grabbing;
+}
+
+.marquee-scroll-content {
+  display: flex;
+  min-width: max-content;
+  align-items: center;
+}
+
+.marquee-item {
+  flex-shrink: 0;
+  margin-right: 32px;
+  user-select: none;
+  pointer-events: none;
+}
+
+.marquee-item img,
+.marquee-item video {
+  height: 320px;
+  width: auto;
+  border-radius: 12px;
+  display: block;
+  pointer-events: none;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.marquee-content {
+  display: inline-flex;
+  animation: marquee-scroll 20s linear infinite;
+}
+
+/* realistic-switch.css */
+
+.panel {
+  position: relative;
+  width: 240px;
+  height: 360px;
+  background-color: #eee;
+  border-radius: 2px;
+  border-width: 10px 6px 3px 6px;
+  border-style: solid;
+  border-color: #fff #ccc #aaa #ddd;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  box-shadow: 0px 7px 0px rgba(0, 0, 0, 0.15);
+}
+
+.panel::before,
+.panel::after {
+  content: '';
+  display: block;
+  width: 25px;
+  height: 25px;
+  border: solid 10px #bbb;
+  background-color: #777;
+  border-width: 11px 0 11px;
+  border-radius: 15px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5), 0 -1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.panel::before {
+  transform: rotate(30deg);
+}
+
+.panel::after {
+  transform: rotate(-10deg);
+}
+
+input {
+  display: none;
+}
+
+label {
+  display: block;
+  position: relative;
+  background-color: #aaa;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  height: 100px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.3);
+  border: 3px solid #999;
+}
+
+label::before,
+label::after {
+  content: '';
+  display: block;
+  position: absolute;
+}
+
+label::before {
+  transition: all 0.3s ease;
+  width: 95%;
+  height: 50px;
+  background-color: #ccc;
+  border-style: solid;
+  border-width: 5px 2px 20px 2px;
+  border-color: #eee #aaa #888 #ddd;
+  top: 0;
+  box-shadow: 0 25px 2px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  border-radius: 4px;
+}
+
+label::after {
+  transition: bottom 0.3s, transform 0.3s, color 0.3s, text-shadow 0.3s;
+  content: 'ON';
+  bottom: 62px;
+  transform: translateY(50px);
+  color: #af7;
+  z-index: 3;
+  opacity: 0.75;
+  font-weight: bold;
+  font-size: 16px;
+  text-shadow: 0 0 7px #bf9, 0 0 20px #bf9;
+}
+
+.overlay {
+  transition: background-color 0.3s, opacity 0.3s;
+  position: absolute;
+  display: block;
+  width: 110vw;
+  height: 110vh;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.75;
+  background-color: #081020;
+  mix-blend-mode: darken;
+}
+
+input:checked ~ label {
+  background-color: #1f2937;
+  border-color: #444;
+  box-shadow: inset 0 4px 2px rgba(0, 0, 0, 0.3),
+              0 15px -1px rgba(0, 0, 0, 0.4);
+}
+
+input:checked ~ label::before {
+  top: 45px;
+  border-width: 20px 2px 5px 2px;
+  background-color: #222;
+  border-color: #333 #111 #000 #111;
+  box-shadow: none;
+}
+
+input:checked ~ label::after {
+  content: 'OFF';
+  bottom: 9px;
+  transform: translateY(-50px);
+  color: #f88787;
+  text-shadow: none;
+  opacity: 1;
+}
+
+input:checked ~ .overlay {
+  opacity: 0.05;
+  background-color: #fffcf3;
+}
+
+
+#cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #26c08c;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 10000;
+  transition: transform 0.05s ease-out; /* Una transición muy rápida solo para suavizar */
+}
+
+#cursor-border {
+  --size: 70px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  /* SOLO TRANSICIONES DE TAMAÑO Y COLOR. Quitamos top/left */
+  transition: width 0.3s ease-out, height 0.3s ease-out, background-color 0.3s ease-out, mix-blend-mode 0.3s ease-out;
+  background: radial-gradient(circle, #3ed9a6 10%, rgba(255, 255, 255, 0) 60%);
+}
+.control-btn {
+  @apply flex flex-row inline-flex items-center justify-center px-4 py-2 border rounded-md text-sm font-medium transition-colors duration-200 
+         bg-transparent dark:bg-transparent 
+         text-text
+      cursor-pointer whitespace-nowrap font-bit; 
+}
+.control-btn:hover:not(:disabled) {
+  @apply bg-[#e0e0e040] dark:bg-[#44444440]; 
+}
+.control-btn:focus-visible {
+  @apply outline-none ring-2 ring-[#9e99f8] ring-offset-2 dark:ring-offset-[#1a1a1a];
+}
