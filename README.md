@@ -1,71 +1,187 @@
-# Getting Started with Create React App
+<div align="center">
+    
+  ____       _                    
+ |  _ \     | |                   
+ | |_) | ___| | ___ _ __          
+ |  _ < / _ \ |/ _ \ '_ \         
+ | |_) |  __/ |  __/ | | |        
+ |____/_\___|_|\___|_|_|_|_       
+  / ____|        | | (_) | |      
+ | |     __ _ ___| |_ _| | | ___  
+ | |    / _` / __| __| | | |/ _ \ 
+ | |___| (_| \__ \ |_| | | | (_) |
+  \_____\__,_|___/\__|_|_|_|\___/ 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 🌍 Available in: [English](#english) | [Español](#español)
 
-## Available Scripts
+[![GitHub followers](https://img.shields.io/github/followers/13djune?style=social)](https://github.com/13djune)
+[![Licencia](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-In the project directory, you can run:
+</div>
 
-### `npm start`
+<br>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<div align="center">
+<pre>
+           ::'.:
+            ''M;
+            """:;
+                M;.     .
+       ...... ..M:'    MM;.
+     ;MMMMMMMMMM:     :MMMM.
+     MMMMMMMMMMMMM..  ;MMMM;.
+     'MMMMMMMMMMMMMM;.MMM'MM;
+      '"MMMMMMMMMMMMMMMMM 'MM;     ,. .
+, ,:    ':MMMMMMMMMMMMMMM  'MM.   :;'""
+"'.:     :M:":MMMMMMMMMMM   'M; ,;:;;""
+'"'M;..;.;M'  ""MMMMMMMM:    'M.MMMM:""
+'"'  ""'""" ;.MMMMMMMM""      '"""'
+         ,;MMMMMMM:""
+         'MMMMMMM;.;.
+            """'""""":M..
+                      ,MM
+                      ;MM:
+                   ,;'MM'
+                   ":"M:
+                   ::::.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+</pre>
+</div>
+<br>
 
-### `npm test`
+  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
+'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<a name="español"></a>
 
-### `npm run build`
+## 🇪🇸 [01] A C E R C A _D E L _ P R O Y E C T O
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### [ ¡Ver la versión desplegada AQUÍ! ](https://belencastillo.netlify.app/)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+¡Bienvenido/a a mi base de datos de proyectos! Este portfolio digital no es solo una vitrina; es un artefacto construido con la precisión del pixel art y la potencia de las tecnologías modernas.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+**Mi objetivo:** Demostrar mi capacidad para desarrollar interfaces de usuario con un enfoque meticuloso en la **estética, la funcionalidad y el rendimiento**.
 
-### `npm run eject`
+### 🛠 Stack de Tecnologías (Core)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Tecnología    | Descripción                                                   |
+| :------------ | :------------------------------------------------------------ |
+| **React** | La librería principal para construir la interfaz de usuario.  |
+| **Tailwind CSS** | Framework CSS utility-first para un diseño rápido y responsivo. |
+| **JavaScript (ES6+)** | Lógica y dinamismo de la aplicación.                          |
+| **Intersection Observer** | Utilizado para la navegación de la barra lateral (scroll-spy). |
+| **Git LFS** | Gestión de archivos grandes (e.g., videos, imágenes de alta resolución). |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<br>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
+'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 🕹️ [02] E X P L O R A R _ L O C A L M E N T E
 
-## Learn More
+Si deseas correr este proyecto en tu entorno local para inspeccionar el código o extenderlo, sigue estas instrucciones:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 1. Clonación del Repositorio
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+git clone [https://github.com/13djune/Portfolio.git](https://github.com/13djune/Portfolio.git)
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### 2. Instalación de Dependencias
 
-### Analyzing the Bundle Size
+cd Portfolio_web 
+npm install 
+**o yarn install / pnpm install**
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 3. Scripts Disponibles
 
-### Making a Progressive Web App
+Comando   -----	Descripción
+npm start   ---	Modo Desarrollo: Corre la aplicación en http://localhost:3000.
+npm run build -	Producción: Construye el bundle final en la carpeta build.
+npm test   ----	Lanza el test runner interactivo.
+                        
+                                  
+  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
+'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 🔑 [03] C O N T A C T O
+¿Te interesa colaborar o tienes alguna pregunta? ¡No dudes en contactarme!
 
-### Advanced Configuration
+LinkedIn: (https://www.linkedin.com/in/belen-castillo-chacon/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Email: belencastillocha@gmail.com
 
-### Deployment
+<div align="right">
+<sub>Este proyecto fue iniciado con Create React App. Las funcionalidades base de scripts han sido conservadas para fines de desarrollo.</sub>
+</div>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
+'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
-### `npm run build` fails to minify
+<a name="English"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## 🇪🇸 [01] ABOUT THE PROJECT
+
+### [ View the expanded version HERE! ](https://belencastillo.netlify.app/)
+
+Welcome to my project database! This digital portfolio is not just a showcase; it is an artefact built with the precision of pixel art and the power of modern technologies.
+
+**My goal:** To demonstrate my ability to develop user interfaces with a meticulous focus on **aesthetics, functionality, and performance**.
+
+### 🛠 Technology Stack (Core)
+
+| Technology    | Description                                                   |
+| :------------ | :------------------------------------------------------------ |
+| **React** | The main library for building the user interface.  |
+| **Tailwind CSS** | Utility-first CSS framework for fast and responsive design. |
+| **JavaScript (ES6+)** | Application logic and dynamism.                          |
+| **Intersection Observer** | Used for sidebar navigation (scroll-spy). |
+| **Git LFS** | Large file management (e.g., videos, high-resolution images). |
+
+<br>
+
+  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
+'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
+
+## 🕹️ [02] E X P L O R E _ L O C A L L Y
+
+If you want to run this project in your local environment to inspect the code or extend it, follow these instructions:
+
+### 1. Cloning the Repository
+
+git clone [https://github.com/13djune/Portfolio.git](https://github.com/13djune/Portfolio.git)
+
+
+### 2. Installing Dependencies
+
+cd Portfolio_web 
+npm install 
+**or yarn install / pnpm install**
+
+### 3. Available Scripts
+
+Command   -----    Description
+npm start   ---	Development Mode: Runs the application at http://localhost:3000.
+npm run build -    Production: Builds the final bundle in the build folder.
+npm test   ----    Launches the interactive test runner.
+
+
+  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
+:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
+'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
+
+## 🔑 [03] C O N T A C T
+Interested in collaborating or have any questions? Feel free to contact me!
+
+LinkedIn: (https://www.linkedin.com/in/belen-castillo-chacon/)
+
+Email: belencastillocha@gmail.com
+
+<div align="right">
+<sub>This project was started with Create React App. The basic scripting functionalities have been retained for development purposes.</sub>
+</div>
 

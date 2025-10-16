@@ -15,11 +15,11 @@ const ProjectGrid = () => {
 
   return (
     <div className="w-full max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
         {projectsData.map((project) => (
           <div
             key={project.id}
-            className="rounded-lg shadow-md overflow-hidden transition-transform transform hover:scale-105 flex flex-col justify-around items-center pb-4"
+            className="rounded-lg pixelbutton3 overflow-hidden transition-transform transform hover:scale-105 flex flex-col justify-around items-center pb-4"
           >
             {project.media[0] && (
               <div className="h-48 overflow-hidden w-[-webkit-fill-available]">
