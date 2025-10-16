@@ -45,9 +45,12 @@ const About = () => {
               y experiencias de usuario excepcionales. Me encanta explorar nuevas tecnologías 
               y enfrentar desafíos creativos.
             </p>
-            <p className="text-lg text-text">
+            <p className="text-lg text-text mb-6">
               Cuando no estoy programando, disfruto del arte digital, la ilustración y 
               explorar tendencias en diseño interactivo.
+            </p>
+            <p className="text-lg text-text">
+              Si quieres descargar mi CV, puedes hacerlo aquí:
             </p>
             <DownloadButtons />
           </div>
