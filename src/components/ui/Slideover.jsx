@@ -33,10 +33,28 @@ const ProjectModal = ({ project, onClose }) => {
       <div className="absolute inset-0 bg-background opacity-50" onClick={onClose}></div>
 
       {/* Modal centrado - Usamos overflow-y-auto en el modal para permitir scroll si el contenido es muy largo */}
-      <div className="relative bg-background rounded-2xl shadow-2xl max-w-5xl w-full mx-4 p-6 pt-0 z-10 animate-fadeIn max-h-[90vh] overflow-y-auto">
+      <div className="relative bg-background rounded-2xl shadow-2xl max-w-6xl w-full mx-4 p-6 pt-0 z-10 animate-fadeIn max-h-[90vh] overflow-y-auto">
         {/* Header */}
-        <div className="flex items-start justify-between mb-4 sticky top-0 bg-background z-20 pb-2">
-          <h2 className="text-2xl font-bold text-text pt-4">{project.title}</h2>
+        <div className="flex items-start justify-between mb-4 sticky top-0 bg-background z-20 py-6 ">
+          <div className='flex flex-row'>
+          <h2 className="text-2xl font-bold text-text">{project.title}</h2>
+      {/* Enlaces */}
+      {project.links && project.links.length > 0 && (
+            <div className="mx-4 flex gap-3 flex-wrap">
+              {project.links.map((link, idx) => (
+                <a
+                  key={idx}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="pixelbutton flex items-center justify-center h-10 px-4"
+                >
+                  {link.label}
+                </a>
+              ))}
+            </div>
+          )}
+          </div>
           <button
             type="button"
             className="p-2 rounded-full text-text hover:text-slate-600 dark:hover:text-slate-200 focus:outline-none"
@@ -129,22 +147,7 @@ const ProjectModal = ({ project, onClose }) => {
           )}
           
        
-          {/* Enlaces */}
-          {project.links && project.links.length > 0 && (
-            <div className="mt-4 flex gap-3 flex-wrap border-t pt-4 border-gray-300 dark:border-gray-700">
-              {project.links.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pixelbutton flex items-center justify-center h-10 px-4"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          )}
+    
         </div>
       </div>
     </div>
