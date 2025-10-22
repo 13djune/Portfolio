@@ -21,7 +21,7 @@ const DownloadButtons = () => {
       label= "Download CV (EN)"
         href={CV_EN}
         download="CV_BelenCastillo_English.pdf"
-        className="font-bit px-4 py-2 text-text rounded-lg flex flex-row items-center "
+        className="font-bit px-4 py-2 text-text rounded-lg flex flex-row items-center"
       >
      Download CV (EN)
       </FancyButton>
