@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-
+import '../../index.css'
 const menuItems = [
-  // ... (Tus SVGs aquí)
   { id: 'about', label: 'Sobre mí', icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" id="Music-Headphones-Human--Streamline-Pixel" height="24" width="24" className='fill-current'>
     <desc>Music Headphones Human Streamline Icon: https://streamlinehq.com</desc>
     <title>music-headphones-human</title>
@@ -74,133 +73,170 @@ const menuItems = [
     </g>
   </svg> },
 ];
-
 const Sidebar = () => {
-  const [active, setActive] = useState('about');
-  const [showLabels, setShowLabels] = useState(false);
+    const [active, setActive] = useState('about');
+    const [menuOpen, setMenuOpen] = useState(false);
+    const [showLabels, setShowLabels] = useState(false);
 
-  const activeRef = useRef(active);
-  const observerRef = useRef(null);
-  const retryTimeoutRef = useRef(null);
-  const lastScrollY = useRef(0);
-
-  useEffect(() => {
+    const activeRef = useRef(active);
+    const observerRef = useRef(null);
+    const retryTimeoutRef = useRef(null);
+  
+    useEffect(() => {
       activeRef.current = active;
-  }, [active]);
-
-  const findSections = () =>
-      menuItems
-          .map(({ id }) => ({
-              id,
-              el: document.getElementById(id),
-          }))
-          .filter((s) => s.el);
-
-
-  const initObserver = useCallback(() => {
+    }, [active]);
+  
+    const findSections = () =>
+      menuItems.map(({ id }) => ({ id, el: document.getElementById(id) })).filter((s) => s.el);
+  
+    const initObserver = useCallback(() => {
       const sections = findSections().map((s) => s.el);
       if (!sections.length) return false;
-
+  
       const detectionOffset = 100;
       const options = {
-          rootMargin: `-${detectionOffset}px 0px -50% 0px`, 
-          threshold: 0, 
+        rootMargin: `-${detectionOffset}px 0px -50% 0px`,
+        threshold: 0,
       };
-
+  
       const observer = new IntersectionObserver((entries) => {
-          const currentScrollY = window.scrollY;
-          lastScrollY.current = currentScrollY; 
-          
-          let bestMatchId = null;
-
-          const intersectingEntries = entries.filter(e => e.isIntersecting);
-
-          if (intersectingEntries.length > 0) {
-              const sortedEntries = intersectingEntries.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-              bestMatchId = sortedEntries[sortedEntries.length - 1].target.id;
-          }
-          
-          if (window.scrollY < 5) {
-              bestMatchId = menuItems[0].id; 
-          }
-
-          if (bestMatchId && bestMatchId !== activeRef.current) {
-              setActive(bestMatchId);
-          }
+        let bestMatchId = null;
+        const intersecting = entries.filter((e) => e.isIntersecting);
+        if (intersecting.length > 0) {
+          const sorted = intersecting.sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+          bestMatchId = sorted[sorted.length - 1].target.id;
+        }
+        if (window.scrollY < 5) bestMatchId = menuItems[0].id;
+        if (bestMatchId && bestMatchId !== activeRef.current) {
+          setActive(bestMatchId);
+        }
       }, options);
-
+  
       sections.forEach((s) => observer.observe(s));
       observerRef.current = observer;
       return true;
-  }, []); 
-
-  useEffect(() => {
+    }, []);
+  
+    useEffect(() => {
       let clean = false;
-      
-      if (window.scrollY < 5) {
-        setActive('about');
-      }
-      
+      if (window.scrollY < 5) setActive('about');
+  
       if (observerRef.current) {
-          observerRef.current.disconnect();
-          observerRef.current = null;
+        observerRef.current.disconnect();
+        observerRef.current = null;
       }
-
+  
       const started = initObserver();
-
       if (!started) {
-          retryTimeoutRef.current = setTimeout(() => {
-              if (!clean) {
-                  initObserver();
-              }
-          }, 500);
+        retryTimeoutRef.current = setTimeout(() => {
+          if (!clean) initObserver();
+        }, 500);
       }
-      
+  
       return () => {
-          clean = true;
-          if (observerRef.current) {
-              observerRef.current.disconnect();
-          }
-          if (retryTimeoutRef.current) {
-              clearTimeout(retryTimeoutRef.current);
-          }
+        clean = true;
+        if (observerRef.current) observerRef.current.disconnect();
+        if (retryTimeoutRef.current) clearTimeout(retryTimeoutRef.current);
       };
-  }, [initObserver]); 
-  return (
-    <aside
-        className="fixed top-1/4 left-4 z-40 flex flex-col space-y-4 text-md font-medium"
-        onMouseEnter={() => setShowLabels(true)}
-        onMouseLeave={() => setShowLabels(false)}
-    >
-        {menuItems.map((item) => (
-            <a
-                key={item.id}
-                href={`#${item.id}`}
-                onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
-                    setActive(item.id); 
-                }}
-                className={`font-bit text-lg flex items-center px-4 py-2 rounded-xl 
-                    ${active === item.id 
-                        ? 'bg-[#3fe2f7] text-[#062016]' // 👈 ¡SOLUCIÓN PARA TEXTO!
-                        : 'text-text hover:bg-[#3fe2f720]'}
-                `}
-            >
-                {/* Quitamos la clase del span para heredar el color del 'a' */}
-                {item.icon} 
-                
-                <span
-                    className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap
-                        ${showLabels ? 'max-w-[150px] opacity-100 ml-3' : 'max-w-0 opacity-0'}
-                    pointer-events-none`}
-                >
-                    {item.label}
-                </span>
-            </a>
-        ))}
-    </aside>
-);
-};
+    }, [initObserver]);
+  
+    return (
+      <>
+        {/* === SVG FILTER (GOOEY EFFECT) === */}
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" style={{ display: 'none' }}>
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" result="blur" stdDeviation="8" />
+              <feColorMatrix
+                in="blur"
+                mode="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+                result="goo"
+              />
+              <feComposite in2="goo" in="SourceGraphic" result="mix" />
+            </filter>
+          </defs>
+        </svg>
+  
+        {/* ----------------------------- */}
+        {/* 1. VERSIÓN MÓVIL (HAMBURGUESA) */}
+        {/* ----------------------------- */}
+        <nav className="gooey-sidebar mobile-menu" style={{ filter: 'url(#goo)' }}>
+          <input
+            type="checkbox"
+            id="menu-open"
+            className="menu-open"
+            checked={menuOpen}
+            onChange={() => setMenuOpen(!menuOpen)}
+          />
+          <label htmlFor="menu-open" className="menu-open-button">
+            <svg className="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
 
-export default Sidebar;
+            <svg className="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </label>
+  
+          {menuItems.map((item, index) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={`menu-item ${active === item.id ? 'active' : ''}`} 
+              style={{
+                transform: menuOpen ? `translate3d(0, ${95 * (index + 1)}px, 0)` : 'translate3d(0,0,0)', 
+              }}
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                setActive(item.id);
+                setMenuOpen(false); 
+              }}
+            >
+              <div className="icon">{item.icon}</div>
+              <div className="label">{item.label}</div>
+            </a>
+          ))}
+        </nav>
+
+        {/* ----------------------------- */}
+        {/* 2. VERSIÓN DESKTOP (ASIDE) */}
+        {/* ----------------------------- */}
+        <aside
+            className="desktop-sidebar" 
+            onMouseEnter={() => setShowLabels(true)}
+            onMouseLeave={() => setShowLabels(false)}
+        >
+            {menuItems.map((item) => (
+                <a
+                    key={item.id}
+                    href={`#${item.id}`}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        document.getElementById(item.id)?.scrollIntoView({ behavior: 'smooth' });
+                        setActive(item.id); 
+                    }}
+                    className={`font-bit text-lg flex items-center px-4 py-2 rounded-xl transition-colors duration-300
+                        ${active === item.id 
+                            ? 'bg-accent text-text' 
+                            : 'text-text hover:bg-[#3fe2f720]'}
+                    `}
+                >
+                    {item.icon} 
+                    
+                    <span
+                        className={`overflow-hidden transition-all duration-300 ease-in-out whitespace-nowrap
+                            ${showLabels ? 'max-w-[150px] opacity-100 ml-3' : 'max-w-0 opacity-0'}
+                        pointer-events-none`}
+                    >
+                        {item.label}
+                    </span>
+                </a>
+            ))}
+        </aside>
+      </>
+    );
+  };
+  
+  export default Sidebar;
