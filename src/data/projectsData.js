@@ -32,7 +32,7 @@ import ESDMeet2 from '../assets/img/Desktop_Feed_Chat.png'
 import ESDMeet3 from '../assets/img/Desktop_Feed.png'
 import ESDMeet4 from '../assets/img/PERFIL.png'
 
-import GitHub from '../assets/img/github.png'
+// import GitHub from '../assets/img/github.png'
 
 export const projectsData = [
   {
