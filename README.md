@@ -1,16 +1,5 @@
 <div align="center">
     
-  ____       _                    
- |  _ \     | |                   
- | |_) | ___| | ___ _ __          
- |  _ < / _ \ |/ _ \ '_ \         
- | |_) |  __/ |  __/ | | |        
- |____/_\___|_|\___|_|_|_|_       
-  / ____|        | | (_) | |      
- | |     __ _ ___| |_ _| | | ___  
- | |    / _` / __| __| | | |/ _ \ 
- | |___| (_| \__ \ |_| | | | (_) |
-  \_____\__,_|___/\__|_|_|_|\___/ 
 
 ### 🌍 Available in: [English](#english) | [Español](#español)
 
@@ -21,37 +10,7 @@
 
 <br>
 
-<div align="center">
-<pre>
-           ::'.:
-            ''M;
-            """:;
-                M;.     .
-       ...... ..M:'    MM;.
-     ;MMMMMMMMMM:     :MMMM.
-     MMMMMMMMMMMMM..  ;MMMM;.
-     'MMMMMMMMMMMMMM;.MMM'MM;
-      '"MMMMMMMMMMMMMMMMM 'MM;     ,. .
-, ,:    ':MMMMMMMMMMMMMMM  'MM.   :;'""
-"'.:     :M:":MMMMMMMMMMM   'M; ,;:;;""
-'"'M;..;.;M'  ""MMMMMMMM:    'M.MMMM:""
-'"'  ""'""" ;.MMMMMMMM""      '"""'
-         ,;MMMMMMM:""
-         'MMMMMMM;.;.
-            """'""""":M..
-                      ,MM
-                      ;MM:
-                   ,;'MM'
-                   ":"M:
-                   ::::.
-
-</pre>
-</div>
 <br>
-
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
 <a name="español"></a>
 
@@ -75,10 +34,6 @@
 
 <br>
 
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
-
 ## 🕹️ [02] E X P L O R A R _ L O C A L M E N T E
 
 Si deseas correr este proyecto en tu entorno local para inspeccionar el código o extenderlo, sigue estas instrucciones:
@@ -101,25 +56,17 @@ npm start   ---	Modo Desarrollo: Corre la aplicación en http://localhost:3000.
 npm run build -	Producción: Construye el bundle final en la carpeta build.
 npm test   ----	Lanza el test runner interactivo.
                         
-                                  
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
 ## 🔑 [03] C O N T A C T O
 ¿Te interesa colaborar o tienes alguna pregunta? ¡No dudes en contactarme!
 
-LinkedIn: (https://www.linkedin.com/in/belen-castillo-chacon/)
+LinkedIn: https://www.linkedin.com/in/belen-castillo-chacon/
 
 Email: belencastillocha@gmail.com
 
 <div align="right">
 <sub>Este proyecto fue iniciado con Create React App. Las funcionalidades base de scripts han sido conservadas para fines de desarrollo.</sub>
 </div>
-
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
 <a name="English"></a>
 
@@ -143,9 +90,6 @@ Welcome to my project database! This digital portfolio is not just a showcase; i
 
 <br>
 
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
 
 ## 🕹️ [02] E X P L O R E _ L O C A L L Y
 
@@ -170,14 +114,10 @@ npm run build -    Production: Builds the final bundle in the build folder.
 npm test   ----    Launches the interactive test runner.
 
 
-  .--.      .-'.      .--.      .--.      .--.      .--.      .`-.      .--.
-:::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\::::::::.\
-'      `--'      `.-'      `--'      `--'      `--'      `-.'      `--'      `
-
 ## 🔑 [03] C O N T A C T
 Interested in collaborating or have any questions? Feel free to contact me!
 
-LinkedIn: (https://www.linkedin.com/in/belen-castillo-chacon/)
+LinkedIn: https://www.linkedin.com/in/belen-castillo-chacon/
 
 Email: belencastillocha@gmail.com
 
