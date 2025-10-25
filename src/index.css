@@ -38,7 +38,6 @@
   --secondary-hover: #9e99f855;
 }
 
-/* Oculta el cursor nativo para que solo se vea el personalizado */
 
 body {
   background-color: var(--background) ;
@@ -97,44 +96,35 @@ p{
     border: none; 
     
     box-shadow: 
-      /* CLAVE: Borde exterior simulado pixelado (múltiples escalones de 1px) */
       0 0 0 1px var(--text), 
-      1px 1px 0 1px var(--text), /* Incrementamos el 'spread' a 1px para grosor */
+      1px 1px 0 1px var(--text), 
       2px 2px 0 1px var(--text),
       3px 3px 0 1px var(--text),
       
-      /* CLAVE: Sombra de Profundidad 3D final (más pronunciada) */
       4px 4px 0 var(--text);
   }
 
-  /* ESTADO HOVER: El botón se eleva */
   .pixelbutton:hover {
     background-color: var(--secondary-hover);
     transform: translate(-2px, -2px);
     
     box-shadow: 
-      /* Borde pixelado (mantenemos el patrón) */
       0 0 0 1px var(--text), 
       1px 1px 0 1px var(--text),
       2px 2px 0 1px var(--text),
       3px 3px 0 1px var(--text),
 
-      /* Sombra de profundidad más grande (simula que se eleva) */
       6px 6px 0 var(--text); 
   }
 
-  /* ESTADO ACTIVE: El botón se "presiona" */
   .pixelbutton:active {
-    /* Mueve el botón a la posición de la sombra (4px, 4px) */
     transform: translate(4px, 4px);
     
-    /* Mantenemos solo el primer 'escalón' del borde para un look de marco hundido */
     box-shadow: 
       0 0 0 1px var(--text),
       1px 1px 0 1px var(--text); 
   }
   
-  /* ESTADO FOCUS: El borde azul claro (sin cambios) */
   .pixelbutton:focus-visible {
     outline: 2px solid var(--focus-outline);
     outline-offset: 3px;
@@ -151,43 +141,34 @@ p{
     border: none; 
     
     box-shadow: 
-      /* CLAVE: Borde exterior simulado pixelado (múltiples escalones de 1px) */
       0 0 0 1px var(--text), 
-      1px 1px 0 1px var(--text), /* Incrementamos el 'spread' a 1px para grosor */
+      1px 1px 0 1px var(--text), 
       2px 2px 0 1px var(--text),
       3px 3px 0 1px var(--text),
       
-      /* CLAVE: Sombra de Profundidad 3D final (más pronunciada) */
       4px 4px 0 var(--text);
   }
 
-  /* ESTADO HOVER: El botón se eleva */
   .pixelbutton2:hover {
     transform: translate(-2px, -2px);
     
     box-shadow: 
-      /* Borde pixelado (mantenemos el patrón) */
       0 0 0 1px var(--text), 
       1px 1px 0 1px var(--text),
       2px 2px 0 1px var(--text),
       3px 3px 0 1px var(--text),
 
-      /* Sombra de profundidad más grande (simula que se eleva) */
       6px 6px 0 var(--text); 
   }
 
-  /* ESTADO ACTIVE: El botón se "presiona" */
   .pixelbutton2:active {
-    /* Mueve el botón a la posición de la sombra (4px, 4px) */
     transform: translate(4px, 4px);
     
-    /* Mantenemos solo el primer 'escalón' del borde para un look de marco hundido */
     box-shadow: 
       0 0 0 1px var(--text),
       1px 1px 0 1px var(--text); 
   }
   
-  /* ESTADO FOCUS: El borde azul claro (sin cambios) */
   .pixelbutton2:focus-visible {
     outline: 2px solid var(--focus-outline);
     outline-offset: 3px;
@@ -204,13 +185,11 @@ p{
     border: none; 
     
     box-shadow: 
-      /* CLAVE: Borde exterior simulado pixelado (múltiples escalones de 1px) */
       0 0 0 1px var(--secondary-hover), 
-      1px 1px 0 1px var(--secondary-hover), /* Incrementamos el 'spread' a 1px para grosor */
+      1px 1px 0 1px var(--secondary-hover), 
       2px 2px 0 1px var(--secondary-hover),
       3px 3px 0 1px var(--secondary-hover),
       
-      /* CLAVE: Sombra de Profundidad 3D final (más pronunciada) */
       4px 4px 0 var(--secondary-hover);
   }
 
@@ -332,7 +311,7 @@ p{
   border-radius: 50%;
   pointer-events: none;
   z-index: 10000;
-  transition: transform 0.05s ease-out; /* Una transición muy rápida solo para suavizar */
+  transition: transform 0.05s ease-out; 
 }
 
 #cursor-border {
@@ -345,7 +324,6 @@ p{
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  /* SOLO TRANSICIONES DE TAMAÑO Y COLOR. Quitamos top/left */
   transition: width 0.3s ease-out, height 0.3s ease-out, background-color 0.3s ease-out, mix-blend-mode 0.3s ease-out;
   background: radial-gradient(circle, #3ed9a6 10%, rgba(255, 255, 255, 0) 60%);
 }
@@ -362,7 +340,7 @@ p{
   @apply outline-none ring-2 ring-[#9e99f8] ring-offset-2 dark:ring-offset-[#1a1a1a];
 }
 /* ================================================================== */
-/* CSS COMPLETO Y ACTUALIZADO MENU                                    */
+/*  MENU                                    */
 /* ================================================================== */
 
 .gooey-sidebar {
@@ -487,13 +465,13 @@ p{
 
 .menu-item:hover {
   background: var(--accent);
-  color: var(--text);
+  color: #062016;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15); 
 }
 
 .menu-item.active {
   background: var(--accent);
-  color: var(--text);
+  color: #062016;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15); 
 }
 
@@ -508,7 +486,7 @@ p{
 }
 
 /* ================================================================== */
-/* LÓGICA RESPONSIVE                                                  */
+/* LÓGICA RESPONSIVE MENU                                             */
 /* ================================================================== */
 
 .desktop-sidebar {
@@ -541,6 +519,6 @@ p{
         display: flex;
         align-items: center; 
         text-decoration: none;
-        color: var(--text); 
+        
     }
 }

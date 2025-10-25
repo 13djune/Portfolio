@@ -30,7 +30,7 @@ const Footer = () => {
           <p>Toda esta web está programada por mí (con React) &lt;3 </p>
           <br/>
 
-          <p>Belén (June) Castillo · actualizado © {new Date().getFullYear()} </p>
+          <p>Belén (June) Castillo · actualizado © octubre {new Date().getFullYear()} </p>
           <br/>
 
           <p>Pixel art: <a id="marina" href="https://marinamartinprieto.cargo.site/" className="text-blue-400 hover:underline">Marina Martín (Concept Artist)</a></p>

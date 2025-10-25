@@ -170,13 +170,11 @@ const Sidebar = () => {
             onChange={() => setMenuOpen(!menuOpen)}
           />
           <label htmlFor="menu-open" className="menu-open-button">
-            <svg className="hamburger-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
-            </svg>
+            <svg className="hamburger-icon"  xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4 6h16v2H4zm0 5h16v2H4zm16 5H4v2h16z"/></svg>
 
-            <svg className="close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2.5" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            </svg>
+
+            <svg className="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M5 5h2v2H5zm4 4H7V7h2zm2 2H9V9h2zm2 0h-2v2H9v2H7v2H5v2h2v-2h2v-2h2v-2h2v2h2v2h2v2h2v-2h-2v-2h-2v-2h-2zm2-2v2h-2V9zm2-2v2h-2V7zm0 0V5h2v2z"/></svg>
+
           </label>
   
           {menuItems.map((item, index) => (
@@ -219,7 +217,7 @@ const Sidebar = () => {
                     }}
                     className={`font-bit text-lg flex items-center px-4 py-2 rounded-xl transition-colors duration-300
                         ${active === item.id 
-                            ? 'bg-accent text-text' 
+                            ? 'bg-accent text-[#062016]' 
                             : 'text-text hover:bg-[#3fe2f720]'}
                     `}
                 >
