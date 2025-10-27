@@ -1,4 +1,4 @@
-
+import React from 'react'; // Necesitas importar React para el componente JSX
 import DB_1 from '../assets/img/Home.png';
 import DB_2 from '../assets/img/About_1.png';
 import DB_3 from '../assets/img/About_2.png';
@@ -61,7 +61,7 @@ export const projectsData = [
     additionalText: 'Digital Bloom, es mi Trabajo de Fin de Máster para explorar cómo nuestra huella digital puede servir como un autorretrato sensible y artístico. El objetivo principal era superar la visión fría y fragmentada de la identidad online, creando una experiencia visual que invitara a la reflexión sobre la relación entre las personas, la tecnología y la privacidad de sus datos. Para llevarlo a cabo, se aplicó la metodología Design Thinking de forma iterativa. Se estructuró la información en tres niveles ("Deseo, Cuerpo y Rastro") y se procedió a diseñar y desarrollar un prototipo funcional de la página web utilizando React, el cual fue posteriormente validado y perfeccionado mediante pruebas directas con usuarios.',
     caseDetails: {
       problem: 'La huella digital suele percibirse de forma fría y fragmentada, sin un componente artístico o de reflexión personal.',
-      options: 'Se evaluó desarrollar una app móvil o una web interactiva; también usar p5.js para visualización o React para la estructura.',
+      options: 'Se evaluó desarrollar una app móvil o una web interactiva; también usar GSAP para visualización o React para la estructura.',
       decision: 'Se eligió React con validación mediante *pruebas directas con usuarios* para asegurar la usabilidad y el impacto emocional de la interfaz.',
       result: 'Se obtuvo un prototipo web funcional que transforma datos personales en una visualización poética y fue bien recibido en las validaciones, cumpliendo el objetivo artístico.',
     },
@@ -197,3 +197,65 @@ export const projectsData = [
     },
 
   ];
+
+// ====================================================================
+// FUNCIÓN DE UTILIDAD PARA ACORTAR ETIQUETAS
+// ====================================================================
+
+const getShortLabel = (label) => {
+  const mapping = {
+    'Sitio Web': 'Web',
+    'Repositorio en GitHub': 'GitHub',
+    'Memoria del proyecto': 'Memoria',
+    'Prototipo en Figma': 'Figma',
+  };
+  return mapping[label] || label;
+};
+
+// ====================================================================
+// COMPONENTE DE REACT PARA RENDERIZAR LOS ENLACES RESPONSIVE
+// (Debes exportarlo y usarlo en tu componente de detalle del proyecto)
+// ====================================================================
+
+/**
+ * Componente que renderiza la sección de enlaces de un proyecto,
+ * mostrando etiquetas cortas en móvil y largas en escritorio.
+ * @param {object} props - Propiedades del componente.
+ * @param {Array<object>} props.links - Array de objetos de enlaces (label, url).
+ * @returns {JSX.Element}
+ */
+export const ProjectLinks = ({ links }) => {
+  // Aseguramos que 'links' exista y sea un array antes de mapear
+  if (!links || links.length === 0) {
+    return null; 
+  }
+
+  return (
+    <div className="flex flex-wrap justify-center gap-3 mt-4">
+      {links.map((link, index) => (
+        <a 
+          key={index} 
+          href={link.url} 
+          target="_blank" 
+          rel="noopener noreferrer"
+          // **CLASE DE BOTÓN**: Usa la clase CSS que definiste previamente
+          className="pixelbutton" 
+        >
+          
+          {/* 1. Etiqueta Larga (Sitio Web, Repositorio de GitHub) 
+             Oculta en móvil (por defecto), Visible en escritorio (lg:inline) */}
+          <span className="hidden lg:inline">
+            {link.label}
+          </span>
+          
+          {/* 2. Etiqueta Corta (Web, GitHub, Memoria) 
+             Visible en móvil (por defecto), Oculta en escritorio (lg:hidden) */}
+          <span className="inline lg:hidden">
+            {getShortLabel(link.label)}
+          </span>
+
+        </a>
+      ))}
+    </div>
+  );
+};

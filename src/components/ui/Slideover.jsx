@@ -1,5 +1,22 @@
 import React, { useState, useEffect } from 'react';
-import { XIcon, ChevronLeftIcon, ChevronRightIcon } from '../icons/Pixelarticons';
+import { Icon } from '@iconify/react';
+
+// --- Definiciones de Íconos Pixel Art (Usando Iconify) ---
+// NOTA: Se asume que la librería @iconify/react está disponible en el entorno.
+
+const XIcon = (props) => (
+  <Icon icon="pixelarticons:close" className="w-6 h-6 pointer-events-none" {...props} />
+);
+
+const ChevronLeftIcon = (props) => (
+  <Icon icon="pixelarticons:chevron-left" className="w-6 h-6 pointer-events-none" {...props} />
+);
+
+const ChevronRightIcon = (props) => (
+  <Icon icon="pixelarticons:chevron-right" className="w-6 h-6 pointer-events-none" {...props} />
+);
+// -----------------------------------------------------------------
+
 
 const ProjectModal = ({ project, onClose }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
@@ -27,34 +44,77 @@ const ProjectModal = ({ project, onClose }) => {
   // Destructuración de los nuevos campos para usarlos fácilmente
   const { role, team, tools, time, learned, caseDetails } = project;
 
+  // Función para obtener la etiqueta abreviada para móvil
+  // Esta función revierte la lógica a la original que genera "Web", "GitHub", "Memoria", etc.
+  const getShortLabel = (label) => {
+    const lowerLabel = label.toLowerCase();
+    
+    // CASOS ESPECÍFICOS:
+    if (lowerLabel.includes('figma') || lowerLabel.includes('prototipo')) {
+      return 'Figma'; // Nuevo caso para 'Prototipo en Figma'
+    }
+    if (lowerLabel.includes('web') || lowerLabel.includes('sitio')) {
+      return 'Web';
+    }
+    if (lowerLabel.includes('repo') || lowerLabel.includes('github')) {
+      return 'GitHub';
+    }
+    if (lowerLabel.includes('memoria') || lowerLabel.includes('documento')) {
+      return 'Memoria';
+    }
+
+    // CASOS GENERALES si la etiqueta ya es corta
+    switch (lowerLabel) {
+      case 'web':
+        return 'Web';
+      case 'github':
+        return 'GitHub';
+      case 'memoria':
+        return 'Memoria';
+      default:
+        // Por defecto, muestra las primeras 3 letras para etiquetas no reconocidas
+        return label.substring(0, 3);
+    }
+  };
+
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center">
       {/* Fondo oscuro */}
       <div className="absolute inset-0 bg-background opacity-50" onClick={onClose}></div>
 
       {/* Modal centrado - Usamos overflow-y-auto en el modal para permitir scroll si el contenido es muy largo */}
-      <div className="relative bg-background rounded-2xl shadow-2xl max-w-6xl w-full mx-4 p-6 pt-0 z-10 animate-fadeIn max-h-[90vh] overflow-y-auto">
-        {/* Header */}
-        <div className="flex items-start justify-between mb-4 sticky top-0 bg-background z-20 py-6 ">
-          <div className='flex flex-row'>
-          <h2 className="text-2xl font-bold text-text">{project.title}</h2>
-      {/* Enlaces */}
-      {project.links && project.links.length > 0 && (
-            <div className="mx-4 flex gap-3 flex-wrap">
-              {project.links.map((link, idx) => (
-                <a
-                  key={idx}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="pixelbutton flex items-center justify-center h-10 px-4"
-                >
-                  {link.label}
-                </a>
-              ))}
-            </div>
-          )}
+      <div className=" relative bg-background rounded-2xl shadow-2xl max-w-6xl w-full mx-4 p-6 pt-0 z-10 animate-fadeIn max-h-[90vh] overflow-y-auto">
+        
+        {/* Header (Sticky) - Contiene Título, Enlaces y Botón de cierre */}
+        <div className="slideover flex items-start justify-between mb-4 sticky top-0 bg-background z-20 py-6 ">
+          
+          {/* Contenedor principal de Título y Enlaces. Se apila en móvil (flex-col) y se pone en fila en escritorio (lg:flex-row). */}
+          <div className='flex flex-col md:flex-row md:items-center lg:flex-row lg:items-center gap-2 lg:gap-4 max-w-[85%]'> 
+            
+            <h2 className="text-2xl font-bold text-text">{project.title}</h2>
+            
+            {/* Enlaces con lógica responsiva de abreviación */}
+            {project.links && project.links.length > 0 && (
+              <div className="flex gap-3 flex-wrap">
+                {project.links.map((link, idx) => (
+                  <a
+                    key={idx}
+                    href={link.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="pixelbutton flex items-center justify-center h-10 px-4 whitespace-nowrap"
+                  >
+                    {/* Texto completo en pantallas grandes */}
+                    <span className="hidden lg:inline">{link.label}</span>
+                    {/* Texto abreviado en pantallas pequeñas */}
+                    <span className="lg:hidden">{getShortLabel(link.label)}</span>
+                  </a>
+                ))}
+              </div>
+            )}
           </div>
+          
           <button
             type="button"
             className="p-2 rounded-full text-text hover:text-slate-600 dark:hover:text-slate-200 focus:outline-none"
@@ -106,16 +166,16 @@ const ProjectModal = ({ project, onClose }) => {
             <h3 className="text-xl font-bold mb-3  text-text">Datos Clave</h3>
             <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm sm:grid-cols-4">
               <div className="col-span-1">
-                <p className="font-semibold text-text">Mi rol</p>
-                <p className='text-base'>{role}</p>
+                <p className="font-semibold text-primary">Mi rol:</p>
+                <p className='text-base text-text'>{role}</p>
               </div>
               <div className="col-span-1">
-                <p className="font-semibold text-text">Equipo</p>
-                <p className='text-base'>{team}</p>
+                <p className="font-semibold text-primary">Equipo:</p>
+                <p className='text-base text-text'>{team}</p>
               </div>
               <div className="col-span-1">
-                <p className="font-semibold text-text">Tiempo</p>
-                <p className='text-base'>{time}</p>
+                <p className="font-semibold text-primary">Tiempo:</p>
+                <p className='text-base text-text'>{time}</p>
               </div>
             </div>
             

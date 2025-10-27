@@ -68,3 +68,34 @@ body {
   @apply
   bg-text
 }
+
+/* ================================================================== */
+/* AJUSTES RESPONSIVE PARA DISPOSITIVOS PEQUEÑOS (< 1024px) */
+/* ================================================================== */
+
+/* -------------------------------------------------- */
+/* 1. Ajustes para la Cabecera de la Aplicación (.App-header) */
+/* -------------------------------------------------- */
+
+@media (max-width: 767px) {
+  .App-header {
+    font-size: calc(12px + 2vmin); 
+    
+    /* min-height: 80vh;  <-- Descomenta si quieres que ocupe menos de la pantalla en móvil */
+  }
+  
+  .App-logo {
+    height: 30vmin; 
+  }
+}
+
+
+/* -------------------------------------------------- */
+/* 2. Ajustes para el Subrayado (.underline) */
+/* -------------------------------------------------- */
+
+@media (max-width: 1023px) {
+  .underline {
+    height: 2px; 
+  }
+}

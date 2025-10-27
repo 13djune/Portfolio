@@ -522,3 +522,96 @@ p{
         
     }
 }
+
+/* ================================================================== */
+/* AJUSTES RESPONSIVE PARA DISPOSITIVOS PEQUEÑOS (< 1024px) */
+/* ================================================================== */
+
+/* -------------------------------------------------- */
+/* 1. Ocultar el cursor personalizado en dispositivos pequeños */
+/* -------------------------------------------------- */
+@media (max-width: 1023px) {
+  #cursor,
+  #cursor-border {
+    display: none !important;
+  }
+
+  body {
+    cursor: default !important;
+  }
+  .slideover{
+    padding-top: 4rem;
+  }
+
+}
+
+/* -------------------------------------------------- */
+/* 2. Ajustes para Teléfonos (Máximo 640px) */
+/* -------------------------------------------------- */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 2.5rem; 
+  }
+
+  h2 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+
+  .primarybutton,
+  .animationbutton {
+    padding: 0.75rem 1.25rem; 
+    font-size: 0.9rem;
+  }
+
+  .pixelbutton, .pixelbutton2, .pixelbutton3 {
+    padding: 0.6rem 1.1rem; 
+    margin: 0.5rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* -------------------------------------------------- */
+/* 3. Ajustes para la Galería de Imágenes (.mwg_effect000) */
+/* -------------------------------------------------- */
+@media (max-width: 767px) {
+  .mwg_effect000 .medias {
+    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    gap: 8px; 
+    padding: 20px 10px; 
+  }
+  .mwg_effect000 .media img {
+    max-height: 120px;
+  }
+}
+
+/* -------------------------------------------------- */
+/* 4. Ajustes para el Menú (Gooey Sidebar) - Para Móviles Muy Pequeños */
+/* -------------------------------------------------- */
+/* Ya tienes una query en 768px, añadiremos una para 480px o menos si es necesario */
+@media (max-width: 480px) {
+  .gooey-sidebar {
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .menu-open-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .menu-open-button .hamburger-icon,
+  .menu-open-button .close-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  .menu-item {
+    width: 60px;
+    height: 65px;
+    font-size: 0.7rem;
+  }
+}
