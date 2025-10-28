@@ -26,6 +26,25 @@ const ProjectModal = ({ project, onClose }) => {
       setCurrentMediaIndex(0);
     }
   }, [project]);
+  useEffect(() => {
+    if (project?.media) {
+      // 1. Precarga de la imagen Siguiente
+      const nextIndex = (currentMediaIndex + 1) % project.media.length;
+      const nextMedia = project.media[nextIndex];
+      if (nextMedia && nextMedia.type === 'image') { // Añadí verificación de nextMedia
+        const img = new Image();
+        img.src = nextMedia.src;
+      }
+
+      // 2. Precarga de la imagen Anterior
+      const prevIndex = (currentMediaIndex - 1 + project.media.length) % project.media.length;
+      const prevMedia = project.media[prevIndex];
+      if (prevMedia && prevMedia.type === 'image') { // Añadí verificación de prevMedia
+        const img = new Image();
+        img.src = prevMedia.src;
+      }
+    }
+  }, [currentMediaIndex, project?.media]);
 
   const showNextMedia = () => {
     if (project?.media) {
@@ -139,6 +158,7 @@ const ProjectModal = ({ project, onClose }) => {
                 src={project.media[currentMediaIndex].src}
                 alt="Project media"
                 className="max-h-[50vh] object-contain rounded-lg shadow-md"
+              decoding="async"
               />
             ) : (
               <video
