@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 // import { Icon } from '@iconify/react';
 import ContactSocials from '../ui/ContactSocials';
-import DrawingCanvas from '../ui/DrawingCanvas';
+// import DrawingCanvas from '../ui/DrawingCanvas';
+import DrawAquarium from '../ui/DrawAquarium';
+
 import Corazon from '../../assets/img/corazon.gif';
 const Contact = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -47,7 +49,7 @@ const Contact = () => {
 
       <ContactSocials />
 
-      <DrawingCanvas />
+      <DrawAquarium />
 
     </section>
   );
