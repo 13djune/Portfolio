@@ -623,10 +623,11 @@ export default function AcuarioPixel2() {
   return (
     <>
       <EstilosGlobales />
-      <div className='flex flex-col'>
+      <div className='flex flex-col items-center
+'>
 
       
-      <div className="canvas-header text-center flex flex-row justify-between items-end text-text px-24">
+      <div className="w-[100%] canvas-header text-center flex flex-row justify-between items-end text-text px-24">
           <p className="text-lg mb-1 text-text">
             Si estás aburrido, prueba a dibujar algo para el acuario:
           </p>
@@ -714,7 +715,14 @@ export default function AcuarioPixel2() {
         </div>
         
       </div>
+        <div className='flex flex-row mt-4'>
+            <p>Inspirado por: </p>
+            <a href="https://annasgarden.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-text font-bit hover:underline">
+              Annas Garden
+            </a>
+        </div>
       </div>
     </>
   );
 }
+
