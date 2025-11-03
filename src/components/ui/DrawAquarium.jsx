@@ -543,51 +543,28 @@ export default function AcuarioPixel2() {
   const [db, setDb] = useState(null);
   const [userId, setUserId] = useState(null);
   const [collectionPath, setCollectionPath] = useState('');
-  // const [firebaseFns, setFirebaseFns] = useState(null); // Ya no se necesita
-
-  // --- Carga dinámica de Firebase ---
-  // useEffect(() => {
-  //   const loadFirebase = async () => {
-  //     try {
-  //       const app = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js");
-  //       const auth = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js");
-  //       const firestore = await import("https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js");
-  //       setFirebaseFns({ ...app, ...auth, ...firestore });
-  //     } catch (e) {
-  //       console.error("Error loading Firebase modules:", e);
-  //     }
-  //   };
-  //   loadFirebase();
-  // }, []);
-  // Ya no se necesita, se usan imports estáticos
 
   // --- Inicialización de Firebase y Autenticación ---
   useEffect(() => {
-    // if (!firebaseFns) return; // Ya no se necesita
-    // const { 
-    //   initializeApp, getAuth, signInAnonymously, 
-    //   onAuthStateChanged, getFirestore, setLogLevel
-    //   // Quitamos signInWithCustomToken porque no es relevante para un proyecto local
-    // } = firebaseFns;
-
     try {
-      // --- ¡IMPORTANTE! PEGA TU CONFIGURACIÓN DE FIREBASE AQUÍ ---
-      // Necesitas crear un proyecto en Firebase (firebase.google.com)
-      // y obtener tu objeto de configuración.
+      // --- ¡IMPORTANTE! AHORA LEE DESDE process.env ---
+      // El código buscará tus claves en el archivo .env
+      // Asegúrate de haber creado el archivo .env en la raíz de tu proyecto
+      // y haber REINICIADO tu servidor.
       const firebaseConfig = {
-        apiKey: "AIzaSyCytHhklx5kkgzK2mMRAdi3ETivBm3i9OM",
-        authDomain: "miacuario-56970.firebaseapp.com",
-        projectId: "miacuario-56970",
-        storageBucket: "miacuario-56970.firebasestorage.app",
-        messagingSenderId: "176057234879",
-        appId: "1:176057234879:web:a4714b9cc5a4d8db389d0a",
-        measurementId: "G-52BVX53NYB"
+        apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+        authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+        projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+        storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+        messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+        appId: process.env.REACT_APP_FIREBASE_APP_ID,
+        measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID
       };
       // --- FIN DE LA CONFIGURACIÓN ---
       
       // Si la config no está rellenada, no continuar.
-      if (firebaseConfig.apiKey === "TU_API_KEY") {
-         console.warn("Configuración de Firebase no encontrada o inválida. Pégala en drawquarium.jsx.");
+      if (!firebaseConfig.apiKey) {
+         console.warn("Configuración de Firebase no encontrada o inválida. Revisa tu archivo .env y REINICIA el servidor.");
          return; // No continuar si la config es incorrecta
       }
 
@@ -618,12 +595,11 @@ export default function AcuarioPixel2() {
     } catch (e) {
       console.error("Error initializing Firebase:", e);
     }
-  }, []); // Dependencia de firebaseFns eliminada
+  }, []); // El array de dependencias está vacío, se ejecuta solo una vez
 
   // --- Carga de Items desde Firestore ---
   useEffect(() => {
-    if (!db || !collectionPath || !userId) return; // firebaseFns eliminado
-    // const { collection, query, onSnapshot } = firebaseFns; // Ya no se necesita
+    if (!db || !collectionPath || !userId) return; 
     
     const q = query(collection(db, collectionPath));
 
@@ -640,7 +616,7 @@ export default function AcuarioPixel2() {
     });
 
     return () => unsubscribe();
-  }, [db, userId, collectionPath]); // firebaseFns eliminado
+  }, [db, userId, collectionPath]); 
 
 
   // --- Renderizado del Acuario y la Paleta ---
@@ -742,4 +718,3 @@ export default function AcuarioPixel2() {
     </>
   );
 }
-
