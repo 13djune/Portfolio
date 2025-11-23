@@ -194,15 +194,15 @@ const ContactSocials = () => {
       href={module.to} 
       target="_blank" 
       rel="noopener noreferrer" 
-      className="block p-4 text-[#9e99f8] dark:text-[#6e3bfc] pointer-events-none"
+      className="block p-4 text-text"
     >
       <div className="flex items-center mb-2">
-        <span className="text-2xl mr-2">
+        <span className="text-3xl mr-2">
           {icons[module.icon]} 
         </span>
         <div className='flex flex-col'>
-        <h4 className="text-lg font-bold font-bit">{module.title}</h4>
-      <p className="text-gray-600 dark:text-gray-300 line-clamp-2">{module.description}</p>
+        <h4 className="text-xl font-bold font-bit text-secondary">{module.title}</h4>
+      <p className="text-text line-clamp-2">{module.description}</p>
 
         </div>
       </div>

@@ -18,7 +18,7 @@
     --primary: #3ed9a6;
     --secondary: #9e99f8;
     --accent: #3fe2f7;
-  --hoveraccent: #3fe2f754;
+  --hover-accent: #3fe2f754;
   --primary-hover: #6ef1c192;
   --secondary-hover: #b3b1fc53;
   
@@ -33,7 +33,7 @@
   --primary: #26c08c;
   --secondary: #6e3bfc;
   --accent: #08aabf;
-  --hoveraccent: #3fe2f754;
+  --hover-accent: #3fe2f754;
   --primary-hover: #3ed9a58e;
   --secondary-hover: #9e99f855;
 }
