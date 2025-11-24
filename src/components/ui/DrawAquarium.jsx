@@ -18,7 +18,6 @@ const EstilosGlobales = () => (
       100% { transform: translateX(-150px) scaleX(1); }
     }
     
-    /* CORRECCIÓN FINAL BURBUJAS */
     @keyframes float-up {
       0% { transform: translateY(0) scale(1); opacity: 0.7; }
       40% { opacity: 0.7; }
@@ -26,7 +25,6 @@ const EstilosGlobales = () => (
       100% { transform: translateY(-600px) scale(1.2); opacity: 0; }
     }
     
-    /* PESTAÑAS */
     .tab-btn {
       flex: 1;
       padding: 10px;
@@ -50,7 +48,6 @@ const EstilosGlobales = () => (
       z-index: 10;
     }
 
-    /* ELEMENTOS UI */
     .paleta-btn {
       cursor: pointer;
       transition: all 0.2s ease;
@@ -118,33 +115,30 @@ const EstilosGlobales = () => (
     .color-input-large::-webkit-color-swatch-wrapper { padding: 0; }
     .color-input-large::-webkit-color-swatch { border: none; border-radius: 10px; }
     
-    /* SLIDER HORIZONTAL (Móvil) */
-    /* Estilo base (móvil) */
     .brush-size-slider {
       -webkit-appearance: none; width: 100%; height: 28px;
       background: #e5e7eb; border-radius: 14px; outline: none;
-      writing-mode: unset; /* Asegura horizontalidad por defecto */
+      writing-mode: unset; 
     }
     .brush-size-slider::-webkit-slider-thumb {
       -webkit-appearance: none; width: 36px; height: 36px;
-      border-radius: 50%; background: var(--primary); 
+      border-radius: 50%; background: #10b981; 
       box-shadow: 0 2px 4px rgba(0,0,0,0.2); border: 4px solid white; margin-top: -4px;
     }
 
-    /* SLIDER VERTICAL (Desktop - solo a partir de 1024px) */
     @media (min-width: 1024px) {
         .brush-size-slider {
             writing-mode: bt-lr; 
             -webkit-appearance: slider-vertical;
-            width: 48px; /* Más ancho */
+            width: 48px; 
             height: 100%; 
             padding: 0;
             background: transparent; 
             cursor: pointer;
         }
         .brush-size-slider::-webkit-slider-thumb {
-             /* Resetear el margen para que esté centrado verticalmente */
             margin-top: 0; 
+            background: #10b981;
         }
     }
   `}</style>
@@ -292,7 +286,6 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   };
 
   return (
-    // CONTENEDOR PRINCIPAL: 
     <div className="flex flex-col lg:flex-row w-full h-full p-2 gap-2 items-center justify-between overflow-hidden min-h-0">
       
       <div className="flex-1 w-full h-full flex items-center justify-center bg-background rounded-xl border-2 border-dashed border-[#3fe2f754] relative min-h-0">
@@ -321,7 +314,7 @@ function LienzoDibujo({ db, userId, collectionPath }) {
                   onChange={(e) => setDrawingSettings(p => ({ ...p, color: e.target.value }))}
                   className="color-input-large shrink-0"
               />
-             <div className="flex-1 lg:flex-none flex flex-row lg:flex-col items-center justify-center gap-1 lg:w-14 lg:bg-background lg:rounded-lg lg:border lg:border-gray-100 lg:py-2 lg:h-[85%]">
+             <div className="flex-1 lg:flex-none flex flex-row lg:flex-col items-center justify-center gap-1 lg:w-14 lg:bg-background lg:rounded-lg lg:border lg:border-hoveraccent lg:py-2  h-[75%]">
                  <span className="text-2xl font-black text-text font-bit leading-none shrink-0 lg:shrink">{drawingSettings.brushSize}</span>
                  <input type="range" min="1" max="4" value={drawingSettings.brushSize}
                       onChange={(e) => setDrawingSettings(p => ({ ...p, brushSize: Number(e.target.value) }))}
@@ -365,7 +358,7 @@ function LienzoDibujo({ db, userId, collectionPath }) {
     <path d="M0 12.19h1.52v7.62H0Z"  stroke-width="1"></path>
   </g>
 </svg></button>
-                 <button onClick={reset} className="control-btn text-red-500 lg:w-full" title="Borrar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Interface-Essential-Bin--Streamline-Pixel" className='fill-current' height="36" width="36">
+                 <button onClick={reset} className="control-btn  lg:w-full" title="Borrar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Interface-Essential-Bin--Streamline-Pixel" className='fill-current' height="36" width="36">
   <desc>
     Interface Essential Bin Streamline Icon: https://streamlinehq.com
   </desc>
@@ -399,7 +392,7 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   );
 }
 
-// --- Paletas  ---
+// --- Paletas definicion ---
 function PaletaPeces({ db, userId, collectionPath }) {
   const añadir = async (tipo) => {
     if (!db) return;
@@ -487,17 +480,18 @@ export default function AcuarioPixel2() {
   return (
     <>
       <EstilosGlobales />
-      <div className='flex flex-col w-full h-[100dvh] overflow-hidden bg-background font-sans pb-safe lg:p-[4rem] p-[1rem]'>
+      <div className='flex flex-col w-full h-[130dvh] overflow-hidden bg-background font-sans pb-safe lg:p-[3rem] p-[1rem]'>
         
-        {/* Header Flotante */}
-        <div className="relative top-0 left-0 w-full h-16 flex items-center justify-between px-4 ">
-           <div className="font-bit text-text flex items-end gap-2 drop-shadow-md">
-              <span className="hidden sm:inline text-md font-bold font-bit">Si te aburres, puedes contribuir en el acuario:</span>
+        {/* Header Flotante: Z-50 para visibilidad */}
+        <div className="relative top-0 left-0 w-full h-16 flex items-end justify-between px-4 z-50">
+           <div className="font-black text-white flex items-center gap-2 drop-shadow-md">
+              <span className="hidden sm:inline text-xl font-bold font-bit text-text">Si te aburres, colabora en el acuario:</span>
            </div>
            <img src={Gato} alt="Gato" className="h-16 w-auto object-contain opacity-90 drop-shadow-md" />
         </div>
 
-        <div className="relative h-[80%] lg:h-[80%] max-h-[50%] lg:max-h-full w-full bg-gradient-to-b from-cyan-200 via-cyan-300 to-blue-500 overflow-hidden z-10 rounded-t-3xl">
+        {/* ACUARIO: AQUÍ CAMBIAMOS ALTURAS. Móvil 30% / Desktop 60% */}
+        <div className="relative h-[45%] lg:h-[60%] w-full bg-gradient-to-b from-cyan-200 via-cyan-300 to-blue-500 overflow-hidden z-10 rounded-t-3xl">
              <div className="absolute inset-0 pointer-events-none bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay"></div>
              {items.map(item => (
                (item.categoria === 'pez' || item.categoria === 'pez-dibujado') 
@@ -507,7 +501,8 @@ export default function AcuarioPixel2() {
              <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white/40 to-transparent pointer-events-none"></div>
         </div>
 
-        <div className="h-[30%] min-h-[60%] w-full bg-background flex flex-col  z-20 rounded-t-3xl border-t border-white/50 -mt-6">
+        {/* PANEL: AQUÍ CAMBIAMOS ALTURAS. Móvil 70% / Desktop 40% */}
+        <div className="h-[55%] lg:h-[40%] w-full bg-background flex flex-col  z-20 rounded-t-3xl border-t border-white/50 -mt-6">
             
             {/* Pestañas */}
             <div className="flex flex-shrink-0 w-full px-2 pt-3 pb-1 bg-transparent gap-2 justify-center">
