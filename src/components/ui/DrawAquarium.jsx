@@ -648,6 +648,12 @@ useEffect(() => {
         </div>
 
       </div>
+      <div className='flex flex-row mt-4'>
+            <p>Inspirado por: </p>
+            <a href="https://annasgarden.vercel.app/" target="_blank" rel="noopener noreferrer" className="text-text font-bit hover:underline hover:text-accent px-2">
+               Annas Garden ❀
+            </a>
+        </div>
     </>
   );
 }
