@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 import Gato from '../../assets/img/gatito.gif'; 
 
-// --- Estilos Globales ---
+// --- Estilos Globales (MODIFICADO: Se usa CSS moderno para el slider vertical) ---
 const EstilosGlobales = () => (
   <style>{`
     @keyframes nadar-derecha {
@@ -128,8 +128,10 @@ const EstilosGlobales = () => (
 
     @media (min-width: 1024px) {
         .brush-size-slider {
-            writing-mode: bt-lr; 
-            -webkit-appearance: slider-vertical;
+            // CORRECCIÓN: Usar propiedades CSS estándar (vertical-lr, direction: rtl)
+            writing-mode: vertical-lr; 
+            direction: rtl; 
+            -webkit-appearance: none; // Evitar la propiedad deprecada
             width: 48px; 
             height: 100%; 
             padding: 0;
@@ -144,7 +146,7 @@ const EstilosGlobales = () => (
   `}</style>
 );
 
-// --- SVGs  ---
+// --- SVGs (Sin cambios) ---
 const PezPixelRojo = () => (<svg width="100%" height="100%" viewBox="0 0 10 8"><rect x="3" y="2" width="1" height="1" fill="#EF4444" /><rect x="4" y="1" width="1" height="1" fill="#F87171" /><rect x="5" y="1" width="1" height="1" fill="#F87171" /><rect x="6" y="2" width="1" height="1" fill="#EF4444" /><rect x="4" y="2" width="1" height="1" fill="#EF4444" /><rect x="5" y="2" width="1" height="1" fill="#EF4444" /><rect x="3" y="3" width="1" height="1" fill="#EF4444" /><rect x="4" y="3" width="1" height="1" fill="#DC2626" /><rect x="5" y="3" width="1" height="1" fill="#DC2626" /><rect x="6" y="3" width="1" height="1" fill="#EF4444" /><rect x="7" y="3" width="1" height="1" fill="#F87171" /><rect x="2" y="4" width="1" height="1" fill="#F87171" /><rect x="3" y="4" width="1" height="1" fill="#DC2626" /><rect x="4" y="4" width="1" height="1" fill="#B91C1C" /><rect x="5" y="4" width="1" height="1" fill="#B91C1C" /><rect x="6" y="4" width="1" height="1" fill="#DC2626" /><rect x="4" y="5" width="1" height="1" fill="#DC2626" /><rect x="5" y="5" width="1" height="1" fill="#DC2626" /><rect x="5" y="0" width="1" height="1" fill="#F87171" /></svg>);
 const PezPixelAzul = () => (<svg width="100%" height="100%" viewBox="0 0 12 10"><rect x="2" y="4" width="1" height="1" fill="#60A5FA" /><rect x="3" y="3" width="1" height="1" fill="#60A5FA" /><rect x="4" y="3" width="1" height="1" fill="#3B82F6" /><rect x="5" y="3" width="1" height="1" fill="#3B82F6" /><rect x="6" y="3" width="1" height="1" fill="#3B82F6" /><rect x="7" y="3" width="1" height="1" fill="#2563EB" /><rect x="8" y="4" width="1" height="1" fill="#60A5FA" /><rect x="3" y="4" width="1" height="1" fill="#3B82F6" /><rect x="4" y="4" width="1" height="1" fill="#2563EB" /><rect x="5" y="4" width="1" height="1" fill="#1D4ED8" /><rect x="6" y="4" width="1" height="1" fill="#1D4ED8" /><rect x="7" y="4" width="1" height="1" fill="#2563EB" /><rect x="4" y="5" width="1" height="1" fill="#3B82F6" /><rect x="5" y="5" width="1" height="1" fill="#2563EB" /><rect x="6" y="5" width="1" height="1" fill="#2563EB" /><rect x="7" y="5" width="1" height="1" fill="#3B82F6" /><rect x="9" y="3" width="1" height="1" fill="#60A5FA" /><rect x="9" y="5" width="1" height="1" fill="#60A5FA" /><rect x="5" y="2" width="1" height="1" fill="#3B82F6" /><rect x="6" y="2" width="1" height="1" fill="#3B82F6" /><rect x="5" y="6" width="1" height="1" fill="#3B82F6" /><rect x="6" y="6" width="1" height="1" fill="#3B82F6" /></svg>);
 const PezPixelVerde = () => (<svg width="100%" height="100%" viewBox="0 0 10 10"><rect x="3" y="2" width="1" height="1" fill="#4ADE80" /><rect x="4" y="2" width="1" height="1" fill="#22C55E" /><rect x="5" y="2" width="1" height="1" fill="#22C55E" /><rect x="2" y="3" width="1" height="1" fill="#4ADE80" /><rect x="3" y="3" width="1" height="1" fill="#22C55E" /><rect x="4" y="3" width="1" height="1" fill="#16A34A" /><rect x="5" y="3" width="1" height="1" fill="#16A34A" /><rect x="6" y="3" width="1" height="1" fill="#22C55E" /><rect x="7" y="3" width="1" height="1" fill="#4ADE80" /><rect x="8" y="3" width="1" height="1" fill="#4ADE80" /><rect x="3" y="4" width="1" height="1" fill="#22C55E" /><rect x="4" y="4" width="1" height="1" fill="#15803D" /><rect x="5" y="4" width="1" height="1" fill="#15803D" /><rect x="6" y="4" width="1" height="1" fill="#16A34A" /><rect x="2" y="5" width="1" height="1" fill="#4ADE80" /><rect x="3" y="5" width="1" height="1" fill="#22C55E" /><rect x="4" y="5" width="1" height="1" fill="#16A34A" /><rect x="5" y="5" width="1" height="1" fill="#16A34A" /><rect x="6" y="5" width="1" height="1" fill="#22C55E" /><rect x="7" y="5" width="1" height="1" fill="#4ADE80" /><rect x="3" y="6" width="1" height="1" fill="#4ADE80" /><rect x="4" y="6" width="1" height="1" fill="#22C55E" /><rect x="5" y="6" width="1" height="1" fill="#22C55E" /><rect x="4" y="7" width="1" height="1" fill="#4ADE80" /></svg>);
@@ -392,7 +394,7 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   );
 }
 
-// --- Paletas definicion ---
+// --- Paletas definicion (Sin cambios) ---
 function PaletaPeces({ db, userId, collectionPath }) {
   const añadir = async (tipo) => {
     if (!db) return;
@@ -433,7 +435,7 @@ function PaletaDecor({ db, userId, collectionPath }) {
   );
 }
 
-// --- APP PRINCIPAL ---
+// --- APP PRINCIPAL (MODIFICADO: Eliminada la variable appId no usada) ---
 export default function AcuarioPixel2() {
   const [items, setItems] = useState([]);
   const [activeTab, setActiveTab] = useState('peces');
@@ -457,8 +459,11 @@ export default function AcuarioPixel2() {
       const dbInstance = getFirestore(app);
       const auth = getAuth(app);
       setDb(dbInstance);
-      const appId = firebaseConfig.appId || 'default-app-id';
-      setCollectionPath(`/artifacts/${appId}/public/data/acuario-v2`);
+      
+      // ANTES: const appId = firebaseConfig.appId || 'default-app-id'; // Se elimina la declaración
+      const appIdValue = firebaseConfig.appId || 'default-app-id'; // Usamos un nombre local para construir la ruta
+      setCollectionPath(`/artifacts/${appIdValue}/public/data/acuario-v2`);
+      
       onAuthStateChanged(auth, async (u) => {
         if (u) setUserId(u.uid);
         else await signInAnonymously(auth).catch(console.error);
