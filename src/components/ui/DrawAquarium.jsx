@@ -1,10 +1,9 @@
-// CÓDIGO COMPLETO PARA COPIAR Y PEGAR EN TU ARCHIVO DrawAquarium.jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import { 
   getFirestore, collection, 
-  query, onSnapshot, addDoc, getDocs, deleteDoc, where 
+  query, onSnapshot, addDoc, getDocs, deleteDoc, doc // <--- ¡doc AÑADIDO!
 } from "firebase/firestore";
 import Gato from '../../assets/img/gatito.gif'; 
 
@@ -512,60 +511,99 @@ export default function AcuarioPixel2() {
   }, [db, collectionPath]);
 
   
-    // --- LÓGICA DE LIMPIEZA GRATUITA (CLIENTE) ---
-    const limpiarPecesAntiguos = useCallback(async () => {
-        if (!db || !collectionPath) return;
+ // --- LÓGICA DE LIMPIEZA GRATUITA (CLIENTE) ---
+ const limpiarElementosAntiguos = useCallback(async () => {
+  if (!db || !collectionPath) return;
 
-        // 1. Comprueba la última limpieza en el almacenamiento local
-        const ultimaLimpieza = localStorage.getItem('lastClean');
-        const hace24Horas = new Date(Date.now() - 24 * 60 * 60 * 1000);
+  // Frecuencia de limpieza: 7 días (1 semana)
+  const cleanIntervalMs = 7 * 24 * 60 * 60 * 1000; 
+  
+  // Clave de almacenamiento local para rastrear la última ejecución
+  const lastCleanKey = 'lastClean_Weekly'; 
+  const ultimaLimpieza = localStorage.getItem(lastCleanKey);
+  const haceLimiteTiempo = new Date(Date.now() - cleanIntervalMs);
 
-        // Si la última limpieza fue hace menos de 24 horas, no hagas nada.
-        if (ultimaLimpieza && new Date(ultimaLimpieza) > hace24Horas) {
-            console.log("Limpieza de peces antiguos ya realizada en las últimas 24 horas.");
-            return;
-        }
+  // Si la última limpieza fue hace menos de 7 días, no hagas nada.
+  if (ultimaLimpieza && new Date(ultimaLimpieza) > haceLimiteTiempo) {
+      console.log("Limpieza semanal ya realizada.");
+      return;
+  }
 
-        try {
-            console.log("Ejecutando limpieza de peces antiguos desde el cliente...");
-            const hace24HorasISO = hace24Horas.toISOString();
+  try {
+      console.log("Ejecutando limpieza semanal...");
+      
+      // Grupos de elementos a limpiar y el mínimo que deben quedar.
+      const targets = [
+          // Peces: Borrar totalmente (minToKeep: 0)
+          { categoria: 'pez', tipos: ['rojo', 'azul', 'verde'], minToKeep: 0, sortField: 'createdAt' },
+          // Decoración: Borrar hasta que queden 10 de cada uno.
+          { categoria: 'decor', tipos: ['burbuja'], minToKeep: 10, sortField: 'createdAt' },
+          { categoria: 'decor', tipos: ['alga'], minToKeep: 10, sortField: 'createdAt' },
+      ];
+      
+      let totalDeleted = 0;
 
-            // 2. Consulta: Busca peces predefinidos ('pez') creados hace más de 24 horas.
-            const q = query(
-                collection(db, collectionPath),
-                where('categoria', '==', 'pez'),
-                where('createdAt', '<', hace24HorasISO) // Filtra los más antiguos de 24h
-            );
+      // 1. OBTENEMOS TODOS LOS ELEMENTOS DE LA COLECCIÓN
+      const qAll = query(collection(db, collectionPath));
+      const snapshot = await getDocs(qAll);
+      const allItems = snapshot.docs.map(doc => ({ id: doc.id, data: doc.data() }));
 
-            const snapshot = await getDocs(q);
-            
-            if (snapshot.empty) {
-                console.log('No hay peces predefinidos antiguos para borrar.');
-                localStorage.setItem('lastClean', new Date().toISOString());
-                return;
-            }
+      // 2. PROCESAMOS CADA GRUPO
+      for (const target of targets) {
+          
+          // Filtramos en JAVASCRIPT: solo elementos que coinciden con la categoría y el tipo.
+          const filteredItems = allItems.filter(item => 
+              item.data.categoria === target.categoria && target.tipos.includes(item.data.tipo)
+          );
+          
+          if (filteredItems.length === 0) continue;
 
-            // 3. Borrado de cada documento encontrado.
-            await Promise.all(snapshot.docs.map(doc => deleteDoc(doc.ref)));
+          // Ordenar por antigüedad (los más recientes al inicio, para no borrarlos)
+          filteredItems.sort((a, b) => new Date(b.data.createdAt) - new Date(a.data.createdAt)); 
+          
+          // 3. CALCULAR CUÁNTOS BORRAR
+          const countToRemove = Math.max(0, filteredItems.length - target.minToKeep);
+          
+          if (countToRemove > 0) {
+              // Borramos los más antiguos (los que están después del índice 'minToKeep')
+              const docsToDeletion = filteredItems.slice(target.minToKeep); 
+              
+              // 4. BORRADO SEGURO
+              await Promise.all(docsToDeletion.map(docToDelete => {
+                  // Construye la referencia segura del documento
+                  const docRef = doc(db, collectionPath, docToDelete.id);
+                  return deleteDoc(docRef);
+              }));
+              
+              totalDeleted += docsToDeletion.length;
+              
+              const name = target.tipos.join(', ');
+              console.log(`[Limpieza] Borrados ${docsToDeletion.length} elementos de tipo: ${name} (Mínimo a mantener: ${target.minToKeep})`);
+          }
+      }
 
-            console.log(`Se borraron ${snapshot.size} peces predefinidos antiguos.`);
-            
-            // 4. Marca la nueva fecha de limpieza para esperar 24 horas.
-            localStorage.setItem('lastClean', new Date().toISOString());
+      if (totalDeleted > 0) {
+          console.log(`Limpieza semanal terminada. Total borrados: ${totalDeleted}`);
+      } else {
+          console.log("Limpieza semanal terminada. No se encontraron elementos que excedieran el límite mínimo.");
+      }
+      
+      // 5. Marca la nueva fecha de limpieza para esperar 7 días.
+      localStorage.setItem(lastCleanKey, new Date().toISOString());
 
-        } catch (error) {
-            console.error("Error al limpiar peces:", error);
-        }
-    }, [db, collectionPath]);
+  } catch (error) {
+      console.error("Error al limpiar elementos. Por favor, verifica la ruta de colección y permisos.", error);
+  }
+}, [db, collectionPath]);
 
-    // 5. useEffect para disparar la limpieza al cargar la app
-    useEffect(() => {
-        // Ejecuta la función si la base de datos está inicializada
-        if (db && collectionPath) {
-            limpiarPecesAntiguos();
-        }
-    }, [db, collectionPath, limpiarPecesAntiguos]);
-    // --- FIN DE LA LÓGICA DE LIMPIEZA ---
+// 5. useEffect para disparar la limpieza al cargar la app
+useEffect(() => {
+    // Ejecuta la función si la base de datos está inicializada
+    if (db && collectionPath) {
+        limpiarElementosAntiguos();
+    }
+}, [db, collectionPath, limpiarElementosAntiguos]);
+// --- FIN DE LA LÓGICA DE LIMPIEZA ---
   
   return (
     <>
