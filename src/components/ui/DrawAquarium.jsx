@@ -3,9 +3,10 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import { 
   getFirestore, collection, 
-  query, onSnapshot, addDoc, getDocs, deleteDoc, doc // <--- ¡doc AÑADIDO!
+  query, onSnapshot, addDoc, getDocs, deleteDoc, doc // <--- ¡'doc' AÑADIDO y listo!
 } from "firebase/firestore";
 import Gato from '../../assets/img/gatito.gif'; 
+import Tortuga from '../../assets/img/Tortuga.png'; // Asegúrate de que esta ruta sea correcta
 
 // --- Estilos Globales (Slider vertical centrado) ---
 const EstilosGlobales = () => (
@@ -176,21 +177,23 @@ const EstilosGlobales = () => (
   `}</style>
 );
 
-// --- SVGs (Sin cambios) ---
 const PezPixelRojo = () => (<svg width="100%" height="100%" viewBox="0 0 10 8"><rect x="3" y="2" width="1" height="1" fill="#EF4444" /><rect x="4" y="1" width="1" height="1" fill="#F87171" /><rect x="5" y="1" width="1" height="1" fill="#F87171" /><rect x="6" y="2" width="1" height="1" fill="#EF4444" /><rect x="4" y="2" width="1" height="1" fill="#EF4444" /><rect x="5" y="2" width="1" height="1" fill="#EF4444" /><rect x="3" y="3" width="1" height="1" fill="#EF4444" /><rect x="4" y="3" width="1" height="1" fill="#DC2626" /><rect x="5" y="3" width="1" height="1" fill="#DC2626" /><rect x="6" y="3" width="1" height="1" fill="#EF4444" /><rect x="7" y="3" width="1" height="1" fill="#F87171" /><rect x="2" y="4" width="1" height="1" fill="#F87171" /><rect x="3" y="4" width="1" height="1" fill="#DC2626" /><rect x="4" y="4" width="1" height="1" fill="#B91C1C" /><rect x="5" y="4" width="1" height="1" fill="#B91C1C" /><rect x="6" y="4" width="1" height="1" fill="#DC2626" /><rect x="4" y="5" width="1" height="1" fill="#DC2626" /><rect x="5" y="5" width="1" height="1" fill="#DC2626" /><rect x="5" y="0" width="1" height="1" fill="#F87171" /></svg>);
 const PezPixelAzul = () => (<svg width="100%" height="100%" viewBox="0 0 12 10"><rect x="2" y="4" width="1" height="1" fill="#60A5FA" /><rect x="3" y="3" width="1" height="1" fill="#60A5FA" /><rect x="4" y="3" width="1" height="1" fill="#3B82F6" /><rect x="5" y="3" width="1" height="1" fill="#3B82F6" /><rect x="6" y="3" width="1" height="1" fill="#3B82F6" /><rect x="7" y="3" width="1" height="1" fill="#2563EB" /><rect x="8" y="4" width="1" height="1" fill="#60A5FA" /><rect x="3" y="4" width="1" height="1" fill="#3B82F6" /><rect x="4" y="4" width="1" height="1" fill="#2563EB" /><rect x="5" y="4" width="1" height="1" fill="#1D4ED8" /><rect x="6" y="4" width="1" height="1" fill="#1D4ED8" /><rect x="7" y="4" width="1" height="1" fill="#2563EB" /><rect x="4" y="5" width="1" height="1" fill="#3B82F6" /><rect x="5" y="5" width="1" height="1" fill="#2563EB" /><rect x="6" y="5" width="1" height="1" fill="#2563EB" /><rect x="7" y="5" width="1" height="1" fill="#3B82F6" /><rect x="9" y="3" width="1" height="1" fill="#60A5FA" /><rect x="9" y="5" width="1" height="1" fill="#60A5FA" /><rect x="5" y="2" width="1" height="1" fill="#3B82F6" /><rect x="6" y="2" width="1" height="1" fill="#3B82F6" /><rect x="5" y="6" width="1" height="1" fill="#3B82F6" /><rect x="6" y="6" width="1" height="1" fill="#3B82F6" /></svg>);
 const PezPixelVerde = () => (<svg width="100%" height="100%" viewBox="0 0 10 10"><rect x="3" y="2" width="1" height="1" fill="#4ADE80" /><rect x="4" y="2" width="1" height="1" fill="#22C55E" /><rect x="5" y="2" width="1" height="1" fill="#22C55E" /><rect x="2" y="3" width="1" height="1" fill="#4ADE80" /><rect x="3" y="3" width="1" height="1" fill="#22C55E" /><rect x="4" y="3" width="1" height="1" fill="#16A34A" /><rect x="5" y="3" width="1" height="1" fill="#16A34A" /><rect x="6" y="3" width="1" height="1" fill="#22C55E" /><rect x="7" y="3" width="1" height="1" fill="#4ADE80" /><rect x="8" y="3" width="1" height="1" fill="#4ADE80" /><rect x="3" y="4" width="1" height="1" fill="#22C55E" /><rect x="4" y="4" width="1" height="1" fill="#15803D" /><rect x="5" y="4" width="1" height="1" fill="#15803D" /><rect x="6" y="4" width="1" height="1" fill="#16A34A" /><rect x="2" y="5" width="1" height="1" fill="#4ADE80" /><rect x="3" y="5" width="1" height="1" fill="#22C55E" /><rect x="4" y="5" width="1" height="1" fill="#16A34A" /><rect x="5" y="5" width="1" height="1" fill="#16A34A" /><rect x="6" y="5" width="1" height="1" fill="#22C55E" /><rect x="7" y="5" width="1" height="1" fill="#4ADE80" /><rect x="3" y="6" width="1" height="1" fill="#4ADE80" /><rect x="4" y="6" width="1" height="1" fill="#22C55E" /><rect x="5" y="6" width="1" height="1" fill="#22C55E" /><rect x="4" y="7" width="1" height="1" fill="#4ADE80" /></svg>);
+const TortugaPNG = () => (<img src={Tortuga} alt="Tortuga" className="w-full h-auto drop-shadow-lg" style={{ imageRendering: 'auto' }} />); // Componente para la Tortuga
 const AlgaPixel = () => (<svg width="100%" height="100%" viewBox="0 0 6 15"><rect x="3" y="0" width="1" height="1" fill="#16A34A" /><rect x="2" y="1" width="1" height="1" fill="#16A34A" /><rect x="3" y="1" width="1" height="1" fill="#15803D" /><rect x="3" y="2" width="1" height="1" fill="#16A34A" /><rect x="4" y="2" width="1" height="1" fill="#15803D" /><rect x="3" y="3" width="1" height="1" fill="#16A34A" /><rect x="2" y="4" width="1" height="1" fill="#16A34A" /><rect x="3" y="4" width="1" height="1" fill="#15803D" /><rect x="3" y="5" width="1" height="1" fill="#16A34A" /><rect x="4" y="5" width="1" height="1" fill="#15803D" /><rect x="3" y="6" width="1" height="1" fill="#16A34A" /><rect x="2" y="7" width="1" height="1" fill="#16A34A" /><rect x="3" y="7" width="1" height="1" fill="#15803D" /><rect x="3" y="8" width="1" height="1" fill="#16A34A" /><rect x="3" y="9" width="1" height="1" fill="#15803D" /><rect x="2" y="10" width="1" height="1" fill="#16A34A" /><rect x="3" y="10" width="1" height="1" fill="#16A34A" /><rect x="3" y="11" width="1" height="1" fill="#15803D" /><rect x="4" y="11" width="1" height="1" fill="#16A34A" /><rect x="2" y="12" width="1" height="1" fill="#16A34A" /><rect x="3" y="12" width="1" height="1" fill="#16A34A" /><rect x="3" y="13" width="1" height="1" fill="#15803D" /><rect x="2" y="14" width="1" height="1" fill="#16A34A" /></svg>);
 const BurbujaPixel = () => (<svg width="100%" height="100%" viewBox="0 0 4 4"><rect x="1" y="0" width="2" height="1" fill="#BFDBFE" /><rect x="0" y="1" width="1" height="2" fill="#BFDBFE" /><rect x="3" y="1" width="1" height="2" fill="#BFDBFE" /><rect x="1" y="3" width="2" height="1" fill="#BFDBFE" /><rect x="1" y="1" width="2" height="2" fill="#DBEAFE" /><rect x="1" y="1" width="1" height="1" fill="#EFF6FF" /></svg>);
 
-const TIPOS_DE_PEZ = { rojo: PezPixelRojo, azul: PezPixelAzul, verde: PezPixelVerde };
+// AÑADIDO 'tortuga' al diccionario de peces
+const TIPOS_DE_PEZ = { rojo: PezPixelRojo, azul: PezPixelAzul, verde: PezPixelVerde, tortuga: TortugaPNG };
 const TIPOS_DE_DECOR = { alga: AlgaPixel, burbuja: BurbujaPixel };
 
 function Pez({ pez }) {
   const { categoria, tipo, dataURL, y, velocidad, delay, tamano } = pez;
   const estiloAnimacion = {
     top: `${y}%`,
-    animation: `nadar-derecha ${velocidad}s linear ${delay}s infinite`,
+    // Ajuste la velocidad para la tortuga para que sea más lenta
+    animation: `nadar-derecha ${tipo === 'tortuga' ? velocidad + 15 : velocidad}s linear ${delay}s infinite`,
     width: `${tamano}px`,
   };
   const PezComponent = TIPOS_DE_PEZ[tipo];
@@ -199,6 +202,7 @@ function Pez({ pez }) {
       {categoria === 'pez-dibujado' ? (
         <img src={dataURL} alt="Pez" className="w-full h-auto drop-shadow-lg" style={{ imageRendering: 'pixelated' }} />
       ) : (
+        // Renderiza el componente SVG o el componente PNG
         <div className="w-full h-full"><PezComponent /></div>
       )}
     </div>
@@ -424,21 +428,29 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   );
 }
 
-// --- Paletas definicion (Sin cambios) ---
+// --- Paletas definicion  ---
 function PaletaPeces({ db, userId, collectionPath }) {
   const añadir = async (tipo) => {
     if (!db) return;
+    // La tortuga necesita un tamaño un poco más grande para ser visible
+    const tamano = tipo === 'tortuga' ? Math.random() * 80 + 100 : Math.random() * 40 + 50; 
+
     await addDoc(collection(db, collectionPath), {
       categoria: 'pez', tipo, y: Math.random() * 70 + 10,
       velocidad: Math.random() * 15 + 25, delay: -(Math.random() * 25),
-      tamano: Math.random() * 40 + 50, createdAt: new Date().toISOString(), ownerId: userId
+      tamano: tamano, createdAt: new Date().toISOString(), ownerId: userId
     });
   };
   return (
     <div className="flex flex-wrap content-center justify-center gap-6 w-full h-full overflow-y-auto p-4">
-      {['rojo', 'azul', 'verde'].map((tipo) => (
+      {['rojo', 'azul', 'verde', 'tortuga'].map((tipo) => (
         <button key={tipo} onClick={() => añadir(tipo)} className="paleta-btn w-36 h-36 bg-background">
-          <div className="w-28 h-28">{tipo === 'rojo' ? <PezPixelRojo/> : tipo === 'azul' ? <PezPixelAzul/> : <PezPixelVerde/>}</div>
+          <div className="w-28 h-28">
+            {tipo === 'rojo' && <PezPixelRojo/>} 
+            {tipo === 'azul' && <PezPixelAzul/>} 
+            {tipo === 'verde' && <PezPixelVerde/>}
+            {tipo === 'tortuga' && <TortugaPNG/>} {/* Renderiza la tortuga PNG */}
+          </div>
         </button>
       ))}
     </div>
@@ -535,7 +547,7 @@ export default function AcuarioPixel2() {
       // Grupos de elementos a limpiar y el mínimo que deben quedar.
       const targets = [
           // Peces: Borrar totalmente (minToKeep: 0)
-          { categoria: 'pez', tipos: ['rojo', 'azul', 'verde'], minToKeep: 0, sortField: 'createdAt' },
+          { categoria: 'pez', tipos: ['rojo', 'azul', 'verde', 'tortuga'], minToKeep: 0, sortField: 'createdAt' }, // AÑADIDA TORTUGA
           // Decoración: Borrar hasta que queden 10 de cada uno.
           { categoria: 'decor', tipos: ['burbuja'], minToKeep: 10, sortField: 'createdAt' },
           { categoria: 'decor', tipos: ['alga'], minToKeep: 10, sortField: 'createdAt' },
