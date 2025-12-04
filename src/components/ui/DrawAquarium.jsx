@@ -1,13 +1,14 @@
+// CÓDIGO COMPLETO PARA COPIAR Y PEGAR EN TU ARCHIVO DrawAquarium.jsx
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { initializeApp } from "firebase/app";
 import { getAuth, signInAnonymously, onAuthStateChanged } from "firebase/auth";
 import { 
   getFirestore, collection, 
-  query, onSnapshot, addDoc 
+  query, onSnapshot, addDoc, getDocs, deleteDoc, where 
 } from "firebase/firestore";
 import Gato from '../../assets/img/gatito.gif'; 
 
-// --- Estilos Globales (MODIFICADO: Slider centrado y con riel) ---
+// --- Estilos Globales (Slider vertical centrado) ---
 const EstilosGlobales = () => (
   <style>{`
     @keyframes nadar-derecha {
@@ -138,7 +139,6 @@ const EstilosGlobales = () => (
             cursor: pointer;
         }
         
-        /* Estilo del RIEL (pista) para WebKit (Chrome/Safari) */
         .brush-size-slider::-webkit-slider-runnable-track {
             height: 100%;
             width: 8px;
@@ -146,7 +146,6 @@ const EstilosGlobales = () => (
             border-radius: 4px;
         }
         
-        /* Estilo del RIEL (pista) para Firefox */
         .brush-size-slider::-moz-range-track {
             height: 100%;
             width: 8px;
@@ -154,7 +153,6 @@ const EstilosGlobales = () => (
             border-radius: 4px;
         }
 
-        /* Centrado del THUMB (círculo) para WebKit */
         .brush-size-slider::-webkit-slider-thumb {
             -webkit-appearance: none; 
             width: 36px; 
@@ -163,12 +161,10 @@ const EstilosGlobales = () => (
             background: #10b981;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
             border: 4px solid white; 
-            /* CORRECCIÓN: Ajustamos el margen para centrar el thumb sobre la pista de 8px */
             margin-left: -14px; 
             margin-right: -14px;
         }
         
-        /* Centrado del THUMB (círculo) para Firefox */
         .brush-size-slider::-moz-range-thumb {
             width: 36px;
             height: 36px;
@@ -176,7 +172,6 @@ const EstilosGlobales = () => (
             background: #10b981;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
             border: 4px solid white;
-            /* Firefox lo suele centrar mejor automáticamente, pero ponemos propiedades base */
         }
     }
   `}</style>
@@ -430,7 +425,7 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   );
 }
 
-// --- Paletas definicion ---
+// --- Paletas definicion (Sin cambios) ---
 function PaletaPeces({ db, userId, collectionPath }) {
   const añadir = async (tipo) => {
     if (!db) return;
@@ -495,7 +490,8 @@ export default function AcuarioPixel2() {
       const dbInstance = getFirestore(app);
       const auth = getAuth(app);
       setDb(dbInstance);
-      const appIdValue = firebaseConfig.appId || 'default-app-id';
+      // CORRECCIÓN: Usamos un nombre local para evitar advertencias de ESLint
+      const appIdValue = firebaseConfig.appId || 'default-app-id'; 
       setCollectionPath(`/artifacts/${appIdValue}/public/data/acuario-v2`);
       onAuthStateChanged(auth, async (u) => {
         if (u) setUserId(u.uid);
@@ -515,6 +511,62 @@ export default function AcuarioPixel2() {
     return () => unsub();
   }, [db, collectionPath]);
 
+  
+    // --- LÓGICA DE LIMPIEZA GRATUITA (CLIENTE) ---
+    const limpiarPecesAntiguos = useCallback(async () => {
+        if (!db || !collectionPath) return;
+
+        // 1. Comprueba la última limpieza en el almacenamiento local
+        const ultimaLimpieza = localStorage.getItem('lastClean');
+        const hace24Horas = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+        // Si la última limpieza fue hace menos de 24 horas, no hagas nada.
+        if (ultimaLimpieza && new Date(ultimaLimpieza) > hace24Horas) {
+            console.log("Limpieza de peces antiguos ya realizada en las últimas 24 horas.");
+            return;
+        }
+
+        try {
+            console.log("Ejecutando limpieza de peces antiguos desde el cliente...");
+            const hace24HorasISO = hace24Horas.toISOString();
+
+            // 2. Consulta: Busca peces predefinidos ('pez') creados hace más de 24 horas.
+            const q = query(
+                collection(db, collectionPath),
+                where('categoria', '==', 'pez'),
+                where('createdAt', '<', hace24HorasISO) // Filtra los más antiguos de 24h
+            );
+
+            const snapshot = await getDocs(q);
+            
+            if (snapshot.empty) {
+                console.log('No hay peces predefinidos antiguos para borrar.');
+                localStorage.setItem('lastClean', new Date().toISOString());
+                return;
+            }
+
+            // 3. Borrado de cada documento encontrado.
+            await Promise.all(snapshot.docs.map(doc => deleteDoc(doc.ref)));
+
+            console.log(`Se borraron ${snapshot.size} peces predefinidos antiguos.`);
+            
+            // 4. Marca la nueva fecha de limpieza para esperar 24 horas.
+            localStorage.setItem('lastClean', new Date().toISOString());
+
+        } catch (error) {
+            console.error("Error al limpiar peces:", error);
+        }
+    }, [db, collectionPath]);
+
+    // 5. useEffect para disparar la limpieza al cargar la app
+    useEffect(() => {
+        // Ejecuta la función si la base de datos está inicializada
+        if (db && collectionPath) {
+            limpiarPecesAntiguos();
+        }
+    }, [db, collectionPath, limpiarPecesAntiguos]);
+    // --- FIN DE LA LÓGICA DE LIMPIEZA ---
+  
   return (
     <>
       <EstilosGlobales />
