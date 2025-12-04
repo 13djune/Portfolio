@@ -7,7 +7,7 @@ import {
 } from "firebase/firestore";
 import Gato from '../../assets/img/gatito.gif'; 
 
-// --- Estilos Globales (MODIFICADO: Se usa CSS moderno para el slider vertical) ---
+// --- Estilos Globales (MODIFICADO: Slider centrado y con riel) ---
 const EstilosGlobales = () => (
   <style>{`
     @keyframes nadar-derecha {
@@ -128,19 +128,55 @@ const EstilosGlobales = () => (
 
     @media (min-width: 1024px) {
         .brush-size-slider {
-            // CORRECCIÓN: Usar propiedades CSS estándar (vertical-lr, direction: rtl)
             writing-mode: vertical-lr; 
             direction: rtl; 
-            -webkit-appearance: none; // Evitar la propiedad deprecada
+            -webkit-appearance: none;
             width: 48px; 
             height: 100%; 
             padding: 0;
             background: transparent; 
             cursor: pointer;
         }
+        
+        /* Estilo del RIEL (pista) para WebKit (Chrome/Safari) */
+        .brush-size-slider::-webkit-slider-runnable-track {
+            height: 100%;
+            width: 8px;
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        
+        /* Estilo del RIEL (pista) para Firefox */
+        .brush-size-slider::-moz-range-track {
+            height: 100%;
+            width: 8px;
+            background: #cbd5e1; 
+            border-radius: 4px;
+        }
+
+        /* Centrado del THUMB (círculo) para WebKit */
         .brush-size-slider::-webkit-slider-thumb {
-            margin-top: 0; 
+            -webkit-appearance: none; 
+            width: 36px; 
+            height: 36px;
+            border-radius: 50%; 
             background: #10b981;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2); 
+            border: 4px solid white; 
+            /* CORRECCIÓN: Ajustamos el margen para centrar el thumb sobre la pista de 8px */
+            margin-left: -14px; 
+            margin-right: -14px;
+        }
+        
+        /* Centrado del THUMB (círculo) para Firefox */
+        .brush-size-slider::-moz-range-thumb {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            border: 4px solid white;
+            /* Firefox lo suele centrar mejor automáticamente, pero ponemos propiedades base */
         }
     }
   `}</style>
@@ -333,31 +369,31 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   </desc>
   <title>interface-essential-navigation-left-circle-2</title>
   <g>
-    <path d="M30.48 12.19H32v7.62h-1.52Z"  stroke-width="1"></path>
-    <path d="M28.95 19.81h1.53v3.05h-1.53Z"  stroke-width="1"></path>
-    <path d="M28.95 9.14h1.53v3.05h-1.53Z"  stroke-width="1"></path>
-    <path d="M27.43 22.86h1.52v3.04h-1.52Z"  stroke-width="1"></path>
-    <path d="M27.43 6.09h1.52v3.05h-1.52Z"  stroke-width="1"></path>
-    <path d="M25.9 25.9h1.53v1.53H25.9Z"  stroke-width="1"></path>
-    <path d="M25.9 4.57h1.53v1.52H25.9Z"  stroke-width="1"></path>
-    <path d="M22.86 27.43h3.04v1.52h-3.04Z"  stroke-width="1"></path>
-    <path d="m24.38 12.19 -1.52 0 0 -1.52 -9.15 0 0 -3.05 -1.52 0 0 1.52 -1.52 0 0 1.53 -1.53 0 0 1.52 -1.52 0 0 1.52 -1.53 0 0 1.53 1.53 0 0 1.52 1.52 0 0 1.53 1.53 0 0 1.52 1.52 0 0 1.52 1.52 0 0 -3.04 6.1 0 0 1.52 1.52 0 0 1.52 -1.52 0 0 1.53 -1.52 0 0 1.52 3.04 0 0 -1.52 3.05 0 0 -1.53 1.52 0 0 -7.62 -1.52 0 0 -1.52z"  stroke-width="1"></path>
-    <path d="M22.86 3.05h3.04v1.52h-3.04Z"  stroke-width="1"></path>
-    <path d="M19.81 28.95h3.05v1.53h-3.05Z"  stroke-width="1"></path>
-    <path d="M19.81 1.52h3.05v1.53h-3.05Z"  stroke-width="1"></path>
-    <path d="M12.19 30.48h7.62V32h-7.62Z"  stroke-width="1"></path>
-    <path d="M12.19 0h7.62v1.52h-7.62Z"  stroke-width="1"></path>
-    <path d="M9.14 28.95h3.05v1.53H9.14Z"  stroke-width="1"></path>
-    <path d="M9.14 1.52h3.05v1.53H9.14Z"  stroke-width="1"></path>
-    <path d="M6.09 27.43h3.05v1.52H6.09Z"  stroke-width="1"></path>
-    <path d="M6.09 3.05h3.05v1.52H6.09Z"  stroke-width="1"></path>
-    <path d="M4.57 25.9h1.52v1.53H4.57Z"  stroke-width="1"></path>
-    <path d="M4.57 4.57h1.52v1.52H4.57Z"  stroke-width="1"></path>
-    <path d="M3.05 22.86h1.52v3.04H3.05Z"  stroke-width="1"></path>
-    <path d="M3.05 6.09h1.52v3.05H3.05Z"  stroke-width="1"></path>
-    <path d="M1.52 19.81h1.53v3.05H1.52Z"  stroke-width="1"></path>
-    <path d="M1.52 9.14h1.53v3.05H1.52Z"  stroke-width="1"></path>
-    <path d="M0 12.19h1.52v7.62H0Z"  stroke-width="1"></path>
+    <path d="M30.48 12.19H32v7.62h-1.52Z"  strokeWidth="1"></path>
+    <path d="M28.95 19.81h1.53v3.05h-1.53Z"  strokeWidth="1"></path>
+    <path d="M28.95 9.14h1.53v3.05h-1.53Z"  strokeWidth="1"></path>
+    <path d="M27.43 22.86h1.52v3.04h-1.52Z"  strokeWidth="1"></path>
+    <path d="M27.43 6.09h1.52v3.05h-1.52Z"  strokeWidth="1"></path>
+    <path d="M25.9 25.9h1.53v1.53H25.9Z"  strokeWidth="1"></path>
+    <path d="M25.9 4.57h1.53v1.52H25.9Z"  strokeWidth="1"></path>
+    <path d="M22.86 27.43h3.04v1.52h-3.04Z"  strokeWidth="1"></path>
+    <path d="m24.38 12.19 -1.52 0 0 -1.52 -9.15 0 0 -3.05 -1.52 0 0 1.52 -1.52 0 0 1.53 -1.53 0 0 1.52 -1.52 0 0 1.52 -1.53 0 0 1.53 1.53 0 0 1.52 1.52 0 0 1.53 1.53 0 0 1.52 1.52 0 0 1.52 1.52 0 0 -3.04 6.1 0 0 1.52 1.52 0 0 1.52 -1.52 0 0 1.53 -1.52 0 0 1.52 3.04 0 0 -1.52 3.05 0 0 -1.53 1.52 0 0 -7.62 -1.52 0 0 -1.52z"  strokeWidth="1"></path>
+    <path d="M22.86 3.05h3.04v1.52h-3.04Z"  strokeWidth="1"></path>
+    <path d="M19.81 28.95h3.05v1.53h-3.05Z"  strokeWidth="1"></path>
+    <path d="M19.81 1.52h3.05v1.53h-3.05Z"  strokeWidth="1"></path>
+    <path d="M12.19 30.48h7.62V32h-7.62Z"  strokeWidth="1"></path>
+    <path d="M12.19 0h7.62v1.52h-7.62Z"  strokeWidth="1"></path>
+    <path d="M9.14 28.95h3.05v1.53H9.14Z"  strokeWidth="1"></path>
+    <path d="M9.14 1.52h3.05v1.53H9.14Z"  strokeWidth="1"></path>
+    <path d="M6.09 27.43h3.05v1.52H6.09Z"  strokeWidth="1"></path>
+    <path d="M6.09 3.05h3.05v1.52H6.09Z"  strokeWidth="1"></path>
+    <path d="M4.57 25.9h1.52v1.53H4.57Z"  strokeWidth="1"></path>
+    <path d="M4.57 4.57h1.52v1.52H4.57Z"  strokeWidth="1"></path>
+    <path d="M3.05 22.86h1.52v3.04H3.05Z"  strokeWidth="1"></path>
+    <path d="M3.05 6.09h1.52v3.05H3.05Z"  strokeWidth="1"></path>
+    <path d="M1.52 19.81h1.53v3.05H1.52Z"  strokeWidth="1"></path>
+    <path d="M1.52 9.14h1.53v3.05H1.52Z"  strokeWidth="1"></path>
+    <path d="M0 12.19h1.52v7.62H0Z"  strokeWidth="1"></path>
   </g>
 </svg></button>
                  <button onClick={reset} className="control-btn  lg:w-full" title="Borrar"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" id="Interface-Essential-Bin--Streamline-Pixel" className='fill-current' height="36" width="36">
@@ -366,16 +402,16 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   </desc>
   <title>interface-essential-bin</title>
   <g>
-    <path d="m25.905 8.38 0 16.76 1.53 0 0 -16.76 3.04 0 0 -1.52 -1.52 0 0 -1.53 -6.1 0 0 -3.05 -1.52 0 0 3.05 -10.67 0 0 -3.05 -1.52 0 0 3.05 -6.09 0 0 1.53 -1.53 0 0 1.52 3.05 0 0 16.76 1.52 0 0 -16.76 19.81 0z"  stroke-width="1"></path>
-    <path d="M24.385 25.14h1.52v4.57h-1.52Z"  stroke-width="1"></path>
-    <path d="M7.625 29.71h16.76v1.53H7.625Z"  stroke-width="1"></path>
-    <path d="M21.335 11.43h1.52v12.19h-1.52Z"  stroke-width="1"></path>
-    <path d="M19.815 23.62h1.52v3.04h-1.52Z"  stroke-width="1"></path>
-    <path d="M15.245 11.43h1.52v15.23h-1.52Z"  stroke-width="1"></path>
-    <path d="M10.665 0.76h10.67v1.52h-10.67Z"  stroke-width="1"></path>
-    <path d="M10.665 23.62h1.53v3.04h-1.53Z"  stroke-width="1"></path>
-    <path d="M9.145 11.43h1.52v12.19h-1.52Z"  stroke-width="1"></path>
-    <path d="M6.095 25.14h1.53v4.57h-1.53Z"  stroke-width="1"></path>
+    <path d="m25.905 8.38 0 16.76 1.53 0 0 -16.76 3.04 0 0 -1.52 -1.52 0 0 -1.53 -6.1 0 0 -3.05 -1.52 0 0 3.05 -10.67 0 0 -3.05 -1.52 0 0 3.05 -6.09 0 0 1.53 -1.53 0 0 1.52 3.05 0 0 16.76 1.52 0 0 -16.76 19.81 0z"  strokeWidth="1"></path>
+    <path d="M24.385 25.14h1.52v4.57h-1.52Z"  strokeWidth="1"></path>
+    <path d="M7.625 29.71h16.76v1.53H7.625Z"  strokeWidth="1"></path>
+    <path d="M21.335 11.43h1.52v12.19h-1.52Z"  strokeWidth="1"></path>
+    <path d="M19.815 23.62h1.52v3.04h-1.52Z"  strokeWidth="1"></path>
+    <path d="M15.245 11.43h1.52v15.23h-1.52Z"  strokeWidth="1"></path>
+    <path d="M10.665 0.76h10.67v1.52h-10.67Z"  strokeWidth="1"></path>
+    <path d="M10.665 23.62h1.53v3.04h-1.53Z"  strokeWidth="1"></path>
+    <path d="M9.145 11.43h1.52v12.19h-1.52Z"  strokeWidth="1"></path>
+    <path d="M6.095 25.14h1.53v4.57h-1.53Z"  strokeWidth="1"></path>
   </g>
 </svg></button>
              </div>
@@ -394,7 +430,7 @@ function LienzoDibujo({ db, userId, collectionPath }) {
   );
 }
 
-// --- Paletas definicion (Sin cambios) ---
+// --- Paletas definicion ---
 function PaletaPeces({ db, userId, collectionPath }) {
   const añadir = async (tipo) => {
     if (!db) return;
@@ -435,7 +471,7 @@ function PaletaDecor({ db, userId, collectionPath }) {
   );
 }
 
-// --- APP PRINCIPAL (MODIFICADO: Eliminada la variable appId no usada) ---
+// --- APP PRINCIPAL ---
 export default function AcuarioPixel2() {
   const [items, setItems] = useState([]);
   const [activeTab, setActiveTab] = useState('peces');
@@ -459,11 +495,8 @@ export default function AcuarioPixel2() {
       const dbInstance = getFirestore(app);
       const auth = getAuth(app);
       setDb(dbInstance);
-      
-      // ANTES: const appId = firebaseConfig.appId || 'default-app-id'; // Se elimina la declaración
-      const appIdValue = firebaseConfig.appId || 'default-app-id'; // Usamos un nombre local para construir la ruta
+      const appIdValue = firebaseConfig.appId || 'default-app-id';
       setCollectionPath(`/artifacts/${appIdValue}/public/data/acuario-v2`);
-      
       onAuthStateChanged(auth, async (u) => {
         if (u) setUserId(u.uid);
         else await signInAnonymously(auth).catch(console.error);
