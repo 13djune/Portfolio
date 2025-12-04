@@ -468,10 +468,10 @@ function PaletaDecor({ db, userId, collectionPath }) {
   return (
     <div className="flex flex-wrap content-center justify-center gap-6 w-full h-full overflow-y-auto p-4">
        <button onClick={() => añadir('alga')} className="paleta-btn w-36 h-44 bg-background">
-         <div className="w-14 h-28"><AlgaPixel /></div><span className="text-base font-bold mt-2 text-green-700">ALGA</span>
+         <div className="w-14 h-28"><AlgaPixel /></div><span className="text-base font-bit text-xl mt-2 text-green-700">ALGA</span>
        </button>
        <button onClick={() => añadir('burbuja')} className="paleta-btn w-36 h-44 bg-background">
-         <div className="w-20 h-20 mb-2"><BurbujaPixel /></div><span className="text-base font-bold text-blue-400">BURBUJA</span>
+         <div className="w-20 h-20 mb-2"><BurbujaPixel /></div><span className="text-base font-bit text-xl text-blue-400">BURBUJA</span>
        </button>
     </div>
   );
