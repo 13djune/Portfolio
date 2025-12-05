@@ -8,6 +8,7 @@ import {
 import Gato from '../../assets/img/gatito.gif'; 
 import Tortuga from '../../assets/img/Tortuga.png'; 
 import Goldfish from '../../assets/img/Goldfish.png';
+import Pececillo from '../../assets/img/Pececillo.png';
 
 // --- Estilos Globales (Slider vertical centrado) ---
 const EstilosGlobales = () => (
@@ -183,11 +184,12 @@ const PezPixelAzul = () => (<svg width="100%" height="100%" viewBox="0 0 12 10">
 const PezPixelVerde = () => (<svg width="100%" height="100%" viewBox="0 0 10 10"><rect x="3" y="2" width="1" height="1" fill="#4ADE80" /><rect x="4" y="2" width="1" height="1" fill="#22C55E" /><rect x="5" y="2" width="1" height="1" fill="#22C55E" /><rect x="2" y="3" width="1" height="1" fill="#4ADE80" /><rect x="3" y="3" width="1" height="1" fill="#22C55E" /><rect x="4" y="3" width="1" height="1" fill="#16A34A" /><rect x="5" y="3" width="1" height="1" fill="#16A34A" /><rect x="6" y="3" width="1" height="1" fill="#22C55E" /><rect x="7" y="3" width="1" height="1" fill="#4ADE80" /><rect x="8" y="3" width="1" height="1" fill="#4ADE80" /><rect x="3" y="4" width="1" height="1" fill="#22C55E" /><rect x="4" y="4" width="1" height="1" fill="#15803D" /><rect x="5" y="4" width="1" height="1" fill="#15803D" /><rect x="6" y="4" width="1" height="1" fill="#16A34A" /><rect x="2" y="5" width="1" height="1" fill="#4ADE80" /><rect x="3" y="5" width="1" height="1" fill="#22C55E" /><rect x="4" y="5" width="1" height="1" fill="#16A34A" /><rect x="5" y="5" width="1" height="1" fill="#16A34A" /><rect x="6" y="5" width="1" height="1" fill="#22C55E" /><rect x="7" y="5" width="1" height="1" fill="#4ADE80" /><rect x="3" y="6" width="1" height="1" fill="#4ADE80" /><rect x="4" y="6" width="1" height="1" fill="#22C55E" /><rect x="5" y="6" width="1" height="1" fill="#22C55E" /><rect x="4" y="7" width="1" height="1" fill="#4ADE80" /></svg>);
 const TortugaPNG = () => (<img src={Tortuga} alt="Tortuga" className="w-full h-auto drop-shadow-lg" style={{ imageRendering: 'auto' }} />); 
 const GoldfishPNG = () => (<img src={Goldfish} alt="Goldfish" className="w-full h-auto drop-shadow-lg" style={{ imageRendering: 'auto' }} />); 
+const PececilloPNG = () => (<img src={Pececillo} alt="Pececillo" className="w-full h-auto drop-shadow-lg" style={{ imageRendering: 'auto' }} />);
 const AlgaPixel = () => (<svg width="100%" height="100%" viewBox="0 0 6 15"><rect x="3" y="0" width="1" height="1" fill="#16A34A" /><rect x="2" y="1" width="1" height="1" fill="#16A34A" /><rect x="3" y="1" width="1" height="1" fill="#15803D" /><rect x="3" y="2" width="1" height="1" fill="#16A34A" /><rect x="4" y="2" width="1" height="1" fill="#15803D" /><rect x="3" y="3" width="1" height="1" fill="#16A34A" /><rect x="2" y="4" width="1" height="1" fill="#16A34A" /><rect x="3" y="4" width="1" height="1" fill="#15803D" /><rect x="3" y="5" width="1" height="1" fill="#16A34A" /><rect x="4" y="5" width="1" height="1" fill="#15803D" /><rect x="3" y="6" width="1" height="1" fill="#16A34A" /><rect x="2" y="7" width="1" height="1" fill="#16A34A" /><rect x="3" y="7" width="1" height="1" fill="#15803D" /><rect x="3" y="8" width="1" height="1" fill="#16A34A" /><rect x="3" y="9" width="1" height="1" fill="#15803D" /><rect x="2" y="10" width="1" height="1" fill="#16A34A" /><rect x="3" y="10" width="1" height="1" fill="#16A34A" /><rect x="3" y="11" width="1" height="1" fill="#15803D" /><rect x="4" y="11" width="1" height="1" fill="#16A34A" /><rect x="2" y="12" width="1" height="1" fill="#16A34A" /><rect x="3" y="12" width="1" height="1" fill="#16A34A" /><rect x="3" y="13" width="1" height="1" fill="#15803D" /><rect x="2" y="14" width="1" height="1" fill="#16A34A" /></svg>);
 const BurbujaPixel = () => (<svg width="100%" height="100%" viewBox="0 0 4 4"><rect x="1" y="0" width="2" height="1" fill="#BFDBFE" /><rect x="0" y="1" width="1" height="2" fill="#BFDBFE" /><rect x="3" y="1" width="1" height="2" fill="#BFDBFE" /><rect x="1" y="3" width="2" height="1" fill="#BFDBFE" /><rect x="1" y="1" width="2" height="2" fill="#DBEAFE" /><rect x="1" y="1" width="1" height="1" fill="#EFF6FF" /></svg>);
 
 // AÑADIDO 'tortuga' al diccionario de peces
-const TIPOS_DE_PEZ = { rojo: PezPixelRojo, azul: PezPixelAzul, verde: PezPixelVerde, tortuga: TortugaPNG, goldfish: GoldfishPNG };
+const TIPOS_DE_PEZ = { rojo: PezPixelRojo, azul: PezPixelAzul, verde: PezPixelVerde, tortuga: TortugaPNG, goldfish: GoldfishPNG, pececillo: PececilloPNG };
 const TIPOS_DE_DECOR = { alga: AlgaPixel, burbuja: BurbujaPixel };
 
 function Pez({ pez }) {
@@ -443,7 +445,7 @@ function PaletaPeces({ db, userId, collectionPath }) {
   };
   return (
     <div className="flex flex-wrap content-center justify-center gap-6 w-full h-full overflow-y-auto p-4">
-      {['rojo', 'azul', 'verde', 'tortuga', 'goldfish'].map((tipo) => (
+      {['rojo', 'azul', 'verde', 'tortuga', 'goldfish', 'pececillo'].map((tipo) => (
         <button key={tipo} onClick={() => añadir(tipo)} className="paleta-btn w-36 h-36 bg-background">
           <div className="w-28 h-28">
             {tipo === 'rojo' && <PezPixelRojo/>} 
@@ -451,6 +453,7 @@ function PaletaPeces({ db, userId, collectionPath }) {
             {tipo === 'verde' && <PezPixelVerde/>}
             {tipo === 'tortuga' && <TortugaPNG/>} 
             {tipo === 'goldfish' && <GoldfishPNG/>}
+            {tipo === 'pececillo' && <PececilloPNG/>}
           </div>
         </button>
       ))}
@@ -547,7 +550,7 @@ export default function AcuarioPixel2() {
       // Grupos de elementos a limpiar y el mínimo que deben quedar.
       const targets = [
           // Peces: Borrar totalmente (minToKeep: 0)
-          { categoria: 'pez', tipos: ['rojo', 'azul', 'verde', 'tortuga', 'goldfish'], minToKeep: 2, sortField: 'createdAt' }, 
+          { categoria: 'pez', tipos: ['rojo', 'azul', 'verde', 'tortuga', 'goldfish', 'pececillo'], minToKeep: 2, sortField: 'createdAt' }, 
           // Decoración: Borrar hasta que queden 10 de cada uno.
           { categoria: 'decor', tipos: ['burbuja'], minToKeep: 10, sortField: 'createdAt' },
           { categoria: 'decor', tipos: ['alga'], minToKeep: 10, sortField: 'createdAt' },
