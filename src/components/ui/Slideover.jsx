@@ -1,233 +1,237 @@
 import React, { useState, useEffect } from 'react';
 import { Icon } from '@iconify/react';
 
-// --- Definiciones de Íconos Pixel Art (Usando Iconify) ---
-// NOTA: Se asume que la librería @iconify/react está disponible en el entorno.
-
+// --- Íconos ---
 const XIcon = (props) => (
-  <Icon icon="pixelarticons:close" className="w-6 h-6 pointer-events-none" {...props} />
+  <Icon icon="pixelarticons:close" className="w-8 h-8 pointer-events-none" {...props} />
 );
 
 const ChevronLeftIcon = (props) => (
-  <Icon icon="pixelarticons:chevron-left" className="w-6 h-6 pointer-events-none" {...props} />
+  <Icon icon="pixelarticons:chevron-left" className="w-8 h-8 pointer-events-none" {...props} />
 );
 
 const ChevronRightIcon = (props) => (
-  <Icon icon="pixelarticons:chevron-right" className="w-6 h-6 pointer-events-none" {...props} />
+  <Icon icon="pixelarticons:chevron-right" className="w-8 h-8 pointer-events-none" {...props} />
 );
-// -----------------------------------------------------------------
-
 
 const ProjectModal = ({ project, onClose }) => {
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0);
 
   useEffect(() => {
-    if (project) {
-      setCurrentMediaIndex(0);
-    }
+    if (project) setCurrentMediaIndex(0);
   }, [project]);
+
+  // Bloquear scroll del body y asegurar que el modal esté arriba
   useEffect(() => {
-    if (project?.media) {
-      // 1. Precarga de la imagen Siguiente
-      const nextIndex = (currentMediaIndex + 1) % project.media.length;
-      const nextMedia = project.media[nextIndex];
-      if (nextMedia && nextMedia.type === 'image') { // Añadí verificación de nextMedia
-        const img = new Image();
-        img.src = nextMedia.src;
-      }
-
-      // 2. Precarga de la imagen Anterior
-      const prevIndex = (currentMediaIndex - 1 + project.media.length) % project.media.length;
-      const prevMedia = project.media[prevIndex];
-      if (prevMedia && prevMedia.type === 'image') { // Añadí verificación de prevMedia
-        const img = new Image();
-        img.src = prevMedia.src;
-      }
+    if (project) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
     }
-  }, [currentMediaIndex, project?.media]);
+    return () => { document.body.style.overflow = 'unset'; };
+  }, [project]);
 
-  const showNextMedia = () => {
+  const showNextMedia = (e) => {
+    e?.stopPropagation();
     if (project?.media) {
-      setCurrentMediaIndex((prevIndex) => (prevIndex + 1) % project.media.length);
+      setCurrentMediaIndex((prev) => (prev + 1) % project.media.length);
     }
   };
 
-  const showPreviousMedia = () => {
+  const showPreviousMedia = (e) => {
+    e?.stopPropagation();
     if (project?.media) {
-      setCurrentMediaIndex((prevIndex) => (prevIndex - 1 + project.media.length) % project.media.length);
+      setCurrentMediaIndex((prev) => (prev - 1 + project.media.length) % project.media.length);
     }
   };
 
   if (!project) return null;
 
-  // Destructuración de los nuevos campos para usarlos fácilmente
   const { role, team, tools, time, learned, caseDetails } = project;
 
-  // Función para obtener la etiqueta abreviada para móvil
-  // Esta función revierte la lógica a la original que genera "Web", "GitHub", "Memoria", etc.
   const getShortLabel = (label) => {
     const lowerLabel = label.toLowerCase();
-    
-    // CASOS ESPECÍFICOS:
-    if (lowerLabel.includes('figma') || lowerLabel.includes('prototipo')) {
-      return 'Figma'; // Nuevo caso para 'Prototipo en Figma'
-    }
-    if (lowerLabel.includes('web') || lowerLabel.includes('sitio')) {
-      return 'Web';
-    }
-    if (lowerLabel.includes('repo') || lowerLabel.includes('github')) {
-      return 'GitHub';
-    }
-    if (lowerLabel.includes('memoria') || lowerLabel.includes('documento')) {
-      return 'Memoria';
-    }
-
-    // CASOS GENERALES si la etiqueta ya es corta
-    switch (lowerLabel) {
-      case 'web':
-        return 'Web';
-      case 'github':
-        return 'GitHub';
-      case 'memoria':
-        return 'Memoria';
-      default:
-        // Por defecto, muestra las primeras 3 letras para etiquetas no reconocidas
-        return label.substring(0, 3);
-    }
+    if (lowerLabel.includes('figma')) return 'Figma';
+    if (lowerLabel.includes('web')) return 'Web';
+    if (lowerLabel.includes('github')) return 'GitHub';
+    return label.length > 6 ? label.substring(0, 4) + '.' : label;
   };
 
-
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center">
-      {/* Fondo oscuro */}
-      <div className="absolute inset-0 bg-background opacity-50" onClick={onClose}></div>
+    // Z-INDEX ALTO: z-[100] para asegurar que tape el navbar
+    <div className="fixed inset-0 z-[100] flex items-end md:items-center justify-center">
+      
+      {/* Backdrop oscuro */}
+      <div 
+        className="absolute inset-0 bg-background/80 backdrop-blur-sm transition-opacity" 
+        onClick={onClose}
+      />
 
-      {/* Modal centrado - Usamos overflow-y-auto en el modal para permitir scroll si el contenido es muy largo */}
-      <div className=" relative bg-background rounded-2xl shadow-2xl max-w-6xl w-full mx-4 p-6 pt-0 z-10 animate-fadeIn max-h-[90vh] overflow-y-auto">
+      {/* MODAL */}
+      <div className="relative w-full h-full md:h-auto md:max-h-[90vh] md:w-[90%] md:max-w-6xl bg-background md:rounded-2xl shadow-2xl flex flex-col animate-fadeIn overflow-hidden border-2 border-text/10">
         
-        {/* Header (Sticky) - Contiene Título, Enlaces y Botón de cierre */}
-        <div className="slideover flex items-start justify-between mb-4 sticky top-0 bg-background z-20 py-6 ">
-          
-          {/* Contenedor principal de Título y Enlaces. Se apila en móvil (flex-col) y se pone en fila en escritorio (lg:flex-row). */}
-          <div className='flex flex-col md:flex-row md:items-center lg:flex-row lg:items-center gap-2 lg:gap-4 max-w-[85%]'> 
+        {/* HEADER STICKY */}
+        <div className="flex-none px-4 py-4 md:px-6 md:py-5 border-b-2 border-text/10 flex items-start justify-between bg-background z-20 sticky top-0 shadow-sm">
+          <div className="flex flex-col gap-3 w-[85%]">
+            {/* Título con tu fuente Bit */}
+            <h2 className="text-xl md:text-3xl font-bold  text-text leading-tight uppercase">
+              {project.title}
+            </h2>
             
-            <h2 className="text-2xl font-bold text-text">{project.title}</h2>
-            
-            {/* Enlaces con lógica responsiva de abreviación */}
-            {project.links && project.links.length > 0 && (
-              <div className="flex gap-3 flex-wrap">
+            {/* Enlaces estilo Pixel Button */}
+            {project.links?.length > 0 && (
+              <div className="flex gap-2 overflow-x-auto pb-1 no-scrollbar md:flex-wrap">
                 {project.links.map((link, idx) => (
                   <a
                     key={idx}
                     href={link.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="pixelbutton flex items-center justify-center h-10 px-4 whitespace-nowrap"
+                    className="pixelbutton flex-shrink-0 flex items-center justify-center h-8 md:h-10 px-4 text-xs md:text-sm whitespace-nowrap font-bit uppercase tracking-wide"
                   >
-                    {/* Texto completo en pantallas grandes */}
-                    <span className="hidden lg:inline">{link.label}</span>
-                    {/* Texto abreviado en pantallas pequeñas */}
-                    <span className="lg:hidden">{getShortLabel(link.label)}</span>
+                    <span className="hidden md:inline">{link.label}</span>
+                    <span className="md:hidden">{getShortLabel(link.label)}</span>
                   </a>
                 ))}
               </div>
             )}
           </div>
-          
+
           <button
             type="button"
-            className="p-2 rounded-full text-text hover:text-slate-600 dark:hover:text-slate-200 focus:outline-none"
+            className="p-2 -mr-2 text-text hover:text-primary transition-colors"
             onClick={onClose}
           >
             <XIcon />
           </button>
         </div>
 
-        {/* Media Carousel */}
-        <div className="relative flex items-center justify-center mb-6">
-          <button
-            className="absolute left-0 p-2 pixelbutton"
-            onClick={showPreviousMedia}
-            disabled={project.media.length <= 1}
-          >
-            <ChevronLeftIcon />
-          </button>
-          {project.media[currentMediaIndex] &&
-            (project.media[currentMediaIndex].type === 'image' ? (
-              <img
-                src={project.media[currentMediaIndex].src}
-                alt="Project media"
-                className="max-h-[50vh] object-contain rounded-lg shadow-md"
-              decoding="async"
-              />
-            ) : (
-              <video
-                src={project.media[currentMediaIndex].src}
-                controls
-                className="max-h-[50vh] object-contain rounded-lg shadow-md"
-              />
-            ))}
-          <button
-            className="absolute right-0 p-2 pixelbutton"
-            onClick={showNextMedia}
-            disabled={project.media.length <= 1}
-          >
-            <ChevronRightIcon />
-          </button>
-        </div>
+        {/* CONTENIDO */}
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-6 md:space-y-8 scrollbar-thin scrollbar-thumb-primary scrollbar-track-transparent">
+          
+          {/* MEDIA CAROUSEL */}
+          <div className="relative w-full bg-text/5 rounded-xl overflow-hidden group aspect-video md:aspect-[21/9] flex items-center justify-center border-2 border-dashed border-text/20">
+            {project.media[currentMediaIndex] && (
+              project.media[currentMediaIndex].type === 'image' ? (
+                <img
+                  src={project.media[currentMediaIndex].src}
+                  alt={`Slide ${currentMediaIndex}`}
+                  className="w-full h-full object-contain"
+                />
+              ) : (
+                <video
+                  src={project.media[currentMediaIndex].src}
+                  controls
+                  className="w-full h-full object-contain"
+                />
+              )
+            )}
 
-        {/* Contenido Detallado */}
-        <div className="text-text space-y-6">
-        <div className="p-4 space-y-3">
-            {project.additionalText && <p className='whitespace-pre-line text-lg'>{project.additionalText}</p>}
-          </div>
-          {/* 1. SECCIÓN DE DATOS CLAVE (Tarjeta de Resumen) */}
-          <div className="p-4 ">
-            <h3 className="text-xl font-bold mb-3  text-text">Datos Clave</h3>
-            <div className="grid grid-cols-2 gap-y-2 gap-x-4 text-sm sm:grid-cols-4">
-              <div className="col-span-1">
-                <p className="font-semibold text-primary">Mi rol:</p>
-                <p className='text-base text-text'>{role}</p>
-              </div>
-              <div className="col-span-1">
-                <p className="font-semibold text-primary">Equipo:</p>
-                <p className='text-base text-text'>{team}</p>
-              </div>
-              <div className="col-span-1">
-                <p className="font-semibold text-primary">Tiempo:</p>
-                <p className='text-base text-text'>{time}</p>
-              </div>
-            </div>
-            
-            <div className="mt-4">
-              <p className="font-semibold text-text">Herramientas</p>
-              <div className="flex flex-wrap gap-2 mt-1">
-                {tools && tools.map((tool, index) => (
-                  <span key={index} className="bg-primary text-background text-xs font-semibold px-2.5 py-0.5 rounded-full shadow-sm">{tool}</span>
-                ))}
-              </div>
-            </div>
-
-            <div className="mt-4 border-t border-gray-300 dark:border-gray-700 pt-3">
-              <p className="font-bold text-lg text-primary">Aprendizaje Principal</p>
-              <p className="italic text-base">{learned}</p>
-            </div>
+            {project.media.length > 1 && (
+              <>
+                <button
+                  className="absolute left-2 top-1/2 -translate-y-1/2 p-2 bg-background border-2 border-text hover:bg-primary hover:text-background rounded-lg shadow-pixel text-text transition-all"
+                  onClick={showPreviousMedia}
+                >
+                  <ChevronLeftIcon />
+                </button>
+                <button
+                  className="absolute right-2 top-1/2 -translate-y-1/2 p-2 bg-background border-2 border-text hover:bg-primary hover:text-background rounded-lg shadow-pixel text-text transition-all"
+                  onClick={showNextMedia}
+                >
+                  <ChevronRightIcon />
+                </button>
+              </>
+            )}
           </div>
 
-
-          {/* 2. SECCIÓN PROCESO (CASE DETAILS) */}
-          {caseDetails && (
-            <div className="p-4  space-y-3">
-              <h3 className="text-xl font-bold text-text">Proceso y Solucion</h3>
-              <p><strong className='text-secondary text-lg font-bold'>Problema: </strong> {caseDetails.problem}</p>
-              <p><strong className='text-secondary text-lg font-bold'>Opciones evaluadas: </strong> {caseDetails.options}</p>
-              <p><strong className='text-secondary text-lg font-bold' >Decisión clave: </strong> {caseDetails.decision}</p>
-              <p><strong className='text-secondary text-lg font-bold'>Resultado: </strong> {caseDetails.result}</p>
+          {/* TEXTO ADICIONAL */}
+          {project.additionalText && (
+            <div className="max-w-none">
+              <p className="whitespace-pre-line text-base md:text-lg text-text leading-relaxed font-medium">
+                {project.additionalText}
+              </p>
             </div>
           )}
-          
-       
-    
+
+          {/* DATOS CLAVE (Estilo limpio) */}
+          <div className="bg-text/5 rounded-xl p-5 border-2 border-text/10">
+            <h3 className="text-xl font-bold mb-4 text-text  uppercase flex items-center gap-2">
+               Ficha Tecnica
+            </h3>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div>
+                <span className="block text-lg uppercase tracking-wider text-primary font-bold font-bit mb-1">Rol</span>
+                <span className="text-sm md:text-base text-text font-bit">{role}</span>
+              </div>
+              <div>
+                <span className="block text-lg uppercase tracking-wider text-primary font-bold font-bit mb-1">Equipo</span>
+                <span className="text-sm md:text-base text-text font-bit">{team}</span>
+              </div>
+              <div>
+                <span className="block text-lg uppercase tracking-wider text-primary font-bold font-bit mb-1">Tiempo</span>
+                <span className="text-sm md:text-base text-text font-bit">{time}</span>
+              </div>
+              <div>
+                <span className="block text-lg uppercase tracking-wider text-primary font-bold font-bit mb-2">Herramientas</span>
+                {/* PILLS: Estilo original redondeado */}
+                <div className="flex flex-wrap gap-2">
+                  {tools?.map((tool, i) => (
+                    <span key={i} className="bg-primary text-background text-sm font-bold px-3 py-1 rounded-full shadow-sm font-bit">
+                      {tool}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {learned && (
+              <div className="mt-6 pt-4 border-t-2 border-dashed border-text/10">
+                <span className="block text-basic uppercase tracking-wider text-primary font-bold font-bit mb-2">Aprendizaje</span>
+                <p className="text-sm md:text-base text-text italic">"{learned}"</p>
+              </div>
+            )}
+          </div>
+
+          {/* PROCESO Y SOLUCIÓN (Estilo web integrado, no alertas genéricas) */}
+          {caseDetails && (
+            <div className="space-y-6 pb-4">
+              <h3 className="text-xl md:text-2xl font-bold text-text border-b-4 border-primary inline-block pb-1">
+                Proceso y Resultado
+              </h3>
+              
+              <div className="grid gap-6 md:grid-cols-2">
+                {/* Caja Problema */}
+                <div className="p-5 border-2 border-text/20 rounded-xl bg-background relative">
+                   <span className="absolute -top-3 left-4 bg-background px-2 text-sm font-bit text-secondary uppercase tracking-widest">
+                     El Problema
+                   </span>
+                   <p className="text-text mt-1">{caseDetails.problem}</p>
+                </div>
+
+                {/* Caja Solución */}
+                <div className="p-5 border-2 border-primary rounded-xl bg-background relative shadow-pixel-sm">
+                   <span className="absolute -top-3 left-4 bg-primary text-background px-2 text-sm font-bit uppercase tracking-widest rounded-xl ">
+                     La Solución
+                   </span>
+                   <p className="text-text mt-1">{caseDetails.result}</p>
+                </div>
+
+                {/* Caja Detalles Extra (Full width) */}
+                <div className="md:col-span-2 bg-text/5 p-5 rounded-xl border border-text/10">
+                  <p className="mb-2">
+                    <strong className="text-primary font-bit text-lg uppercase mr-2">Decisión Clave:</strong> 
+                    {caseDetails.decision}
+                  </p>
+                  <p className="">
+                    <strong className="text-primary font-bit text-lg uppercase mr-2">Opciones:</strong> 
+                    {caseDetails.options}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

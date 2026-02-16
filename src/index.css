@@ -298,34 +298,41 @@ p{
   mix-blend-mode: darken;
 }
 
-
-
-
-#cursor {
+/* --- Estilos Base --- */
+#cursor, #cursor-border {
   position: fixed;
   top: 0;
   left: 0;
-  width: 10px;
-  height: 10px;
-  background-color: #26c08c;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 10000;
-  transition: transform 0.05s ease-out; 
+  /* Inicialmente fuera de pantalla para que no parpadee al cargar */
+  transform: translate3d(-100px, -100px, 0) translate(-50%, -50%); 
+}
+
+#cursor {
+  width: 8px; 
+  height: 8px;
+  background: #3ed9a6;
+  z-index: 9999;
+  will-change: transform; 
 }
 
 #cursor-border {
-  --size: 70px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transition: width 0.3s ease-out, height 0.3s ease-out, background-color 0.3s ease-out, mix-blend-mode 0.3s ease-out;
+  width: 70px;
+  height: 70px;
   background: radial-gradient(circle, #3ed9a6 10%, rgba(255, 255, 255, 0) 60%);
+  mix-blend-mode: normal;
+  z-index: 9998;
+  transition: width 0.3s ease, height 0.3s ease, background 0.3s ease, mix-blend-mode 0.3s ease;
+  will-change: transform, width, height; 
+}
+
+/* --- Estado Hover (Activado por la clase JS) --- */
+#cursor-border.cursor-hover {
+  width: 30px;  
+  height: 30px;
+  background: #3ed9a6; 
+  mix-blend-mode: difference; 
 }
 .control-btn {
   @apply flex flex-row inline-flex items-center justify-center px-4 py-2 border rounded-md text-sm font-medium transition-colors duration-200 

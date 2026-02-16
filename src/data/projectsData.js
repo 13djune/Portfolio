@@ -62,7 +62,7 @@ export const projectsData = [
     caseDetails: {
       problem: 'La huella digital suele percibirse de forma fría y fragmentada, sin un componente artístico o de reflexión personal.',
       options: 'Se evaluó desarrollar una app móvil o una web interactiva; también usar GSAP para visualización o React para la estructura.',
-      decision: 'Se eligió React con validación mediante *pruebas directas con usuarios* para asegurar la usabilidad y el impacto emocional de la interfaz.',
+      decision: 'Se eligió React con validación mediante pruebas directas con usuarios para asegurar la usabilidad y el impacto emocional de la interfaz.',
       result: 'Se obtuvo un prototipo web funcional que transforma datos personales en una visualización poética y fue bien recibido en las validaciones, cumpliendo el objetivo artístico.',
     },
     links: [
@@ -79,7 +79,7 @@ export const projectsData = [
     team: 'Equipo de 5 personas',
     tools: ['HTML', 'CSS', 'JavaScript', 'Bootstrap', 'GitHub', 'Netlify'],
     time: '3 semanas (Enero 2024)',
-    learned: 'Perfeccioné la implementación de menús *hamburguesa* responsivos funcionales, priorizando la accesibilidad en móvil.',
+    learned: 'Perfeccioné la implementación de menús hamburguesa responsivos funcionales, priorizando la accesibilidad en móvil.',
       media: [
         { type: 'image', src: talsie1 },
         { type: 'image', src: talsie2 },
@@ -90,7 +90,7 @@ export const projectsData = [
       caseDetails: {
         problem: 'Crear una presencia digital completa para una marca de productos con las secciones esenciales de e-commerce de forma rápida y eficiente.',
         options: 'Se consideró usar CSS puro o un framework como Bootstrap; se optó por Bootstrap para acelerar el desarrollo de la estructura y responsividad.',
-        decision: 'Se decidió usar **Bootstrap** y enfocar mi trabajo en el diseño principal y la **funcionalidad responsiva del menú** para garantizar una buena experiencia móvil.',
+        decision: 'Se decidió usar Bootstrap y enfocar mi trabajo en el diseño principal y la funcionalidad responsiva del menú para garantizar una buena experiencia móvil.',
         result: 'Se lanzó una web funcional, alojada en Netlify, con una interfaz de marca coherente y un menú navegable en todos los dispositivos.',
       },
       links: [
@@ -116,8 +116,8 @@ export const projectsData = [
       additionalText: 'Alphegor es una marca de ropa inspirada en un tema futurista y diferente. Su propósito principal es proporcionar a los usuarios una experiencia inmersiva para explorar y comprender el mundo del que nació Alphegor. Se utilizaron habilidades y conocimientos de HTML+CSS+JS, el repositorio de Github y el programa Netlify a través del cual se sincronizará y publicará el sitio web. La versión responsiva del sitio web no fue creada. Junio de 2024, Madrid.',
       caseDetails: {
         problem: 'Crear una experiencia web altamente estética e inmersiva para el PFC de moda con un enfoque temático futurista en un plazo ajustado.',
-        options: 'Se valoró un desarrollo full-stack o un enfoque *static-site* simple; se priorizó la experiencia visual sobre la complejidad funcional.',
-        decision: 'Se decidió usar **HTML/CSS/JS** puros para tener control total sobre el diseño y la animación, dejando la **versión responsiva fuera del alcance** inicial.',
+        options: 'Se valoró un desarrollo full-stack o un enfoque static-site simple; se priorizó la experiencia visual sobre la complejidad funcional.',
+        decision: 'Se decidió usar HTML/CSS/JS puros para tener control total sobre el diseño y la animación, dejando la versión responsiva fuera del alcance inicial.',
         result: 'Se entregó un sitio web con alta fidelidad al diseño conceptual futurista, que sirvió como un portafolio inmersivo para el proyecto de moda.',
       },
       links: [
@@ -141,8 +141,8 @@ export const projectsData = [
       additionalText: 'Su propósito principal es proporcionar a los usuarios una herramienta accesible para gestionar problemas cotidianos, aprender sobre ellos y fomentar una comunidad de apoyo. La aplicación está dirigida a personas que buscan complementar su bienestar mental con métodos psicológicos respaldados, aunque no pretende ser un sustituto de la terapia profesional. En un contexto donde un alto porcentaje de la población sufre de trastornos mentales como la depresión, Serenyx emerge como una solución práctica y accesible para mejorar la salud mental en la vida cotidiana. Junio de 2024, Madrid',
       caseDetails: {
         problem: 'Existe una alta prevalencia de problemas de salud mental y se necesita una herramienta digital, práctica y accesible para la gestión emocional diaria.',
-        options: 'Se consideró una web *responsive* o una app nativa; se decidió por una aplicación para la inmediatez y el acceso a funciones nativas del móvil.',
-        decision: 'Se priorizó el diseño de **accesibilidad y flujo de usuario** mediante la creación de un prototipo de alta fidelidad en **Figma** para validar la experiencia.',
+        options: 'Se consideró una web responsive o una app nativa; se decidió por una aplicación para la inmediatez y el acceso a funciones nativas del móvil.',
+        decision: 'Se priorizó el diseño de accesibilidad y flujo de usuario mediante la creación de un prototipo de alta fidelidad en Figma para validar la experiencia.',
         result: 'Se generó un prototipo navegable que establece las bases para una herramienta de apoyo mental viable, con un enfoque claro en la experiencia del usuario (UX).',
       },
       links: [
@@ -162,10 +162,10 @@ export const projectsData = [
         { type: 'video', src: enstock },      ],
       additionalText: 'La revista está pensada para ser una colección, tratando diferentes preocupaciones que podemos tener en el mundo creativo o artístico, y al mismo tiempo usando un alimento que puede ser similar al tema. Este volumen trata sobre la incertidumbre y está vinculado al repollo morado.',
       caseDetails: {
-        problem: 'Crear un *spot* visualmente atractivo que comunique el tema abstracto de la "Incertidumbre" a través del simbolismo del repollo morado y la dualidad 2D/3D.',
-        options: 'Se evaluó usar animación *stop-motion* o animación digital; se eligió esta última para la flexibilidad y la integración de 3D.',
-        decision: 'Se optó por la combinación de **Cinema 4D y After Effects** para lograr una estética dinámica que mezcla lo táctil (2D) con lo digital (3D).',
-        result: 'Se produjo un *spot* de corta duración que capta la atención y comunica eficazmente el concepto y la identidad visual de la revista.',
+        problem: 'Crear un spot visualmente atractivo que comunique el tema abstracto de la "Incertidumbre" a través del simbolismo del repollo morado y la dualidad 2D/3D.',
+        options: 'Se evaluó usar animación stop-motion o animación digital; se eligió esta última para la flexibilidad y la integración de 3D.',
+        decision: 'Se optó por la combinación de Cinema 4D y After Effects para lograr una estética dinámica que mezcla lo táctil (2D) con lo digital (3D).',
+        result: 'Se produjo un spot de corta duración que capta la atención y comunica eficazmente el concepto y la identidad visual de la revista.',
       },
       link: null,
     },
@@ -188,7 +188,7 @@ export const projectsData = [
       caseDetails: {
         problem: 'La comunicación interna en la escuela es fragmentada, dificultando el acceso a información relevante y el sentido de comunidad entre los miembros.',
         options: 'Se evaluó usar plataformas existentes (ej. Slack) o diseñar una solución a medida; se eligió esta última para integrar funciones específicas de la escuela.',
-        decision: 'Se decidió iniciar con una fase de **investigación de usuarios (*User Research*)** y el diseño de la **Arquitectura de la Información** para definir los flujos clave.',
+        decision: 'Se decidió iniciar con una fase de investigación de usuarios (User Research) y el diseño de la Arquitectura de la Información para definir los flujos clave.',
         result: 'Se diseñó un prototipo en Figma con una AI clara, que resuelve los problemas de comunicación y sirve como base para el desarrollo futuro.',
       },
       links:[
@@ -217,13 +217,6 @@ const getShortLabel = (label) => {
 // (Debes exportarlo y usarlo en tu componente de detalle del proyecto)
 // ====================================================================
 
-/**
- * Componente que renderiza la sección de enlaces de un proyecto,
- * mostrando etiquetas cortas en móvil y largas en escritorio.
- * @param {object} props - Propiedades del componente.
- * @param {Array<object>} props.links - Array de objetos de enlaces (label, url).
- * @returns {JSX.Element}
- */
 export const ProjectLinks = ({ links }) => {
   // Aseguramos que 'links' exista y sea un array antes de mapear
   if (!links || links.length === 0) {
@@ -238,18 +231,14 @@ export const ProjectLinks = ({ links }) => {
           href={link.url} 
           target="_blank" 
           rel="noopener noreferrer"
-          // **CLASE DE BOTÓN**: Usa la clase CSS que definiste previamente
+          // CLASE DE BOTÓN: Usa la clase CSS que definiste previamente
           className="pixelbutton" 
         >
           
-          {/* 1. Etiqueta Larga (Sitio Web, Repositorio de GitHub) 
-             Oculta en móvil (por defecto), Visible en escritorio (lg:inline) */}
           <span className="hidden lg:inline">
             {link.label}
           </span>
           
-          {/* 2. Etiqueta Corta (Web, GitHub, Memoria) 
-             Visible en móvil (por defecto), Oculta en escritorio (lg:hidden) */}
           <span className="inline lg:hidden">
             {getShortLabel(link.label)}
           </span>
