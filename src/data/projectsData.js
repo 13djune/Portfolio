@@ -1,4 +1,13 @@
 import React from 'react'; // Necesitas importar React para el componente JSX
+
+import Diana_1 from '../assets/img/Diana_1.png';
+import Diana_2 from '../assets/img/Diana_2.png';
+import Diana_3 from '../assets/img/Diana_3.png';
+import Diana_4 from '../assets/img/Diana_4.png';
+import Diana_5 from '../assets/img/Diana_5.png';
+import Diana_6 from '../assets/img/Diana_6.png';
+import Diana_7 from '../assets/img/Diana_7.png';
+
 import DB_1 from '../assets/img/Home.png';
 import DB_2 from '../assets/img/About_1.png';
 import DB_3 from '../assets/img/About_2.png';
@@ -37,6 +46,39 @@ import ESDMeet4 from '../assets/img/PERFIL.png'
 export const projectsData = [
   {
     id: 1,
+    title: 'DianaTcuida',
+    description: 'Ecosistema digital de acompañamiento para mujeres con cáncer de mama, integrando una IA empática (Gemini) para ofrecer apoyo emocional y contenido médico fiable.',
+    role: 'Diseñadora UI/UX, Desarrolladora Frontend e Integradora de IA',
+    team: 'Proyecto Freelance con agencia',
+    tools: ['React', 'Tailwind CSS', 'Gemini API', 'Responsive Design', 'SEO', 'Mailchimp', 'GitHub'], 
+    time: 'Febrero 2026 - Actualidad',
+    learned: 'Aprendí a integrar Inteligencia Artificial generativa con un enfoque humanista, ajustando los modelos (prompts) para que la tecnología no sea fría, sino una herramienta de calidez y acompañamiento.',
+    media: [
+      { type: 'image', src: Diana_1 }, 
+      { type: 'image', src: Diana_2 }, 
+      { type: 'image', src: Diana_3 }, 
+      { type: 'image', src: Diana_4 }, 
+      { type: 'image', src: Diana_5 }, 
+      { type: 'image', src: Diana_6 }, 
+      { type: 'image', src: Diana_7 }, 
+      // { type: 'video', src: Diana_Video } 
+    ],
+    additionalText: 'DIANA nace con una misión clara: proponer un espacio con nombre propio y voz humana donde la experiencia de la paciente se cruza con el conocimiento de los profesionales de la salud. El objetivo es acompañar de forma honesta a mujeres con cáncer de mama, ayudándolas a entender cada fase del proceso para reducir el miedo y el sentimiento de soledad.\n\nPara lograr este "acompañamiento informado", desarrollé una herramienta innovadora utilizando la **API de Gemini**. No es un simple chatbot médico, sino un espacio seguro diseñado para que las usuarias puedan expresarse. A través de una ingeniería de prompts cuidadosa, la IA ofrece un feedback acogedor y empático, actuando como una voz fiable dentro de un ecosistema que crece desde la confianza y no desde el ruido.',
+    caseDetails: {
+      problem: 'Las pacientes oncológicas a menudo se enfrentan a un exceso de información técnica fría o desinformación en internet, lo que aumenta su ansiedad y sensación de aislamiento.',
+      options: 'Se consideró un blog estático o un foro tradicional, pero se detectó la necesidad de una interacción más inmediata y privada para momentos de vulnerabilidad.',
+      decision: 'Se integró la API de Gemini para crear un asistente conversacional capaz de validar emociones y ofrecer respuestas cálidas ("voz humana"), filtradas bajo criterios de acompañamiento seguro.',
+      result: 'Se construyó una comunidad sólida y un entorno diferenciado donde la tecnología sirve para humanizar el proceso, ofreciendo consuelo inmediato y redirigiendo a contenido profesional cuando es necesario.',
+    },
+    links: [
+      { label: 'Sitio Web', url: 'https://dianatcuida.es/' },
+      { label: 'Repositorio', url: 'https://github.com/13djune/DianaT' },
+      { label: 'Instagram', url: 'https://www.instagram.com/dianatcuida/' }
+
+    ]
+},
+  {
+    id: 2,
     title: 'Digital Bloom',
     description: 'Un autorretrato digital sensible que transforma mis datos personales en una experiencia visual y poética, fomentando la reflexión sobre la identidad.',
     role: 'Diseñadora UX/UI y Desarrolladora Frontend',
@@ -72,7 +114,7 @@ export const projectsData = [
     ]
   },
     {
-      id: 2,
+      id: 3,
       title: 'TALSIE',
       description: 'Web que satisfaría las necesidades de una marca de productos.',
       role: 'Diseñadora y Desarrolladora Frontend ',
@@ -99,7 +141,7 @@ export const projectsData = [
     ]
     },
     {
-      id: 3,
+      id: 4,
       title: 'ALPHEGOR',
       description: 'Web del proyecto de fin de carrera de una estudiante de diseño de moda.',
       role: 'Desarrolladora Web Frontend',
@@ -126,7 +168,7 @@ export const projectsData = [
     ] 
     },
     {
-      id: 4,
+      id: 5,
       title: 'Serenyx',
       description: 'Una aplicación para abordar las necesidades de salud mental y gestión de emociones.',
       role: 'Diseñadora UX/UI Principal',
@@ -150,7 +192,7 @@ export const projectsData = [
       ]
     },
     {
-      id: 5,
+      id: 6,
       title: 'EN STOCK',
       description: 'Un spot de la revista "EN STOCK" que combina 3D y 2D.',
       role: 'Diseñadora Gráfica y Animadora 2D/3D',
@@ -170,7 +212,7 @@ export const projectsData = [
       link: null,
     },
     {
-      id: 6,
+      id: 7,
       title: 'ESDMeet',
       description: 'Una plataforma digital para optimizar la comunicación y fortalecer la comunidad escolar.',
       role: 'Diseñadora UX/UI',

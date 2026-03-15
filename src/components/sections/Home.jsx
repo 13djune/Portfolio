@@ -17,7 +17,8 @@ const Home = () => (
       
       <div className="space-y-2 text-base md:text-lg">
         <p>una diseñadora gráfica y multimedia</p>
-        <p>con un máster en diseño interactivo (UX/UI), basada en Madrid.</p>
+        <p>con un máster en diseño interactivo (UX/UI),</p>
+        <p>establecida en Madrid.</p>
         <p className="mt-4 font-medium">Encantada de conocerte :)</p>
       </div>
     </div>
